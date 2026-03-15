@@ -111,6 +111,27 @@ html, body {
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
+.amounts {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.amounts button {
+  flex: 1;
+  border: 2px solid #c4b5fd;
+  background: #f5f3ff;
+  color: #6d28d9;
+  border-radius: 999px;
+  padding: 8px 0;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.amounts button:hover {
+  background: #ddd6fe;
+}
+
 .input::placeholder {
   color: #64748b; /* slate-500 */
   opacity: 1;
@@ -212,9 +233,9 @@ html, body {
 }
 
 .thankyou-head {
-  font-family: "Zeyada", cursive;
+  font-family: "Arapey", "Times New Roman", Times, serif;
   color: #a78bfa;
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 700;
   text-shadow: 0.6px 0.6px 0 #8b5cf6;
   margin: 0;
@@ -222,7 +243,7 @@ html, body {
 
 .thankyou-copy {
   color: #334155; /* slate-700 */
-  font-size: 14px;
+  font-size: 16px;
   margin: 0;
 }
 
