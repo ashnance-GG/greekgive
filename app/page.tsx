@@ -56,11 +56,31 @@ export default function Page() {
             />
 
             <input
-              type="text"
-              inputMode="numeric"
-              placeholder="Donation Amount (minimum $5)"
-              className="input"
-              aria-label="Donation Amount"
+           {/* Preset Amounts */}
+<div className="amounts">
+  <button type="button" onClick={() => {
+    const el = document.getElementById("amount") as HTMLInputElement;
+    if (el) el.value = "5";
+  }}> $5 </button>
+
+  <button type="button" onClick={() => {
+    const el = document.getElementById("amount") as HTMLInputElement;
+    if (el) el.value = "10";
+  }}> $10 </button>
+
+  <button type="button" onClick={() => {
+    const el = document.getElementById("amount") as HTMLInputElement;
+    if (el) el.value = "25";
+  }}> $25 </button>
+</div>
+
+<input
+  id="amount"
+  type="text"
+  inputMode="numeric"
+  placeholder="Donation Amount (minimum $5)"
+  className="input"
+/>
             />
 
             <input
