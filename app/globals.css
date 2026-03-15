@@ -1,0 +1,240 @@
+/* Base layout reset for our app (no Tailwind) */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+.gg-body {
+  background: linear-gradient(to bottom, #f3e8ff, #faf5ff); /* soft lilac gradient */
+  color: #0f172a; /* slate-900 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Main container */
+.gg-main {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.gg-container {
+  width: 100%;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Header */
+.gg-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.brand {
+  /* Zeyada "bold" – simulate bold since Zeyada has only 400 */
+  font-family: "Zeyada", cursive, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  font-size: clamp(48px, 8vw, 84px);
+  color: #a78bfa; /* purple-400 */
+  font-weight: 700; /* synthesized bold */
+  text-shadow: 0.6px 0.6px 0 #8b5cf6; /* subtle depth (purple-500) */
+  margin: 0;
+  line-height: 0.95;
+}
+
+.tagline {
+  /* Arapey */
+  font-family: "Arapey", "Times New Roman", Times, serif;
+  color: #a78bfa; /* purple-400 */
+  font-size: clamp(16px, 2.2vw, 22px); /* responsive: min 16px, max ~22px */
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+
+/* Tabs */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.tab {
+  font-family: "Zeyada", cursive, system-ui;
+  font-size: 22px;
+  padding: 12px 28px;
+  border-radius: 999px;
+  border: 2px solid #e5e7eb; /* slate-200 */
+  background: white;
+  color: #a78bfa; /* purple-400 */
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tab:hover {
+  background: #f5f3ff; /* violet-50 */
+}
+
+.tab.active {
+  background: #a78bfa; /* purple-400 */
+  color: white;
+  box-shadow: 0 6px 16px rgba(167, 139, 250, 0.35);
+}
+
+/* Form */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.input {
+  width: 100%;
+  border: 2px solid #cbd5e1; /* slate-300 */
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 15px;
+  color: #0f172a; /* slate-900 */
+  caret-color: #0f172a;
+  outline: none;
+  background: #ffffff;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.input::placeholder {
+  color: #64748b; /* slate-500 */
+  opacity: 1;
+  letter-spacing: 0.02em;
+}
+
+.input:focus {
+  border-color: #8b5cf6; /* purple-500 */
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.25);
+}
+
+/* Payment section */
+.payment {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.payment-title {
+  font-size: 13px;
+  color: #a78bfa; /* purple-400 */
+  letter-spacing: 0.06em;
+  margin: 0 0 2px 0;
+}
+
+.payment-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid #cbd5e1; /* slate-300 */
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: white;
+}
+
+.payment-option.disabled {
+  opacity: 0.65;
+  border-color: #e5e7eb; /* slate-200 */
+}
+
+.payment-option span {
+  font-size: 14px;
+  color: #334155; /* slate-700 */
+}
+
+.radio {
+  accent-color: #8b5cf6; /* purple-500 */
+}
+
+.payment-note {
+  margin: 2px 0 0 2px;
+  font-size: 12px;
+  color: #a78bfa; /* purple-400 */
+  line-height: 1.35;
+}
+
+/* Buttons */
+.primary {
+  width: 100%;
+  background: #a78bfa; /* purple-400 */
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.05s ease;
+}
+
+.primary:hover {
+  background: #8b5cf6; /* purple-500 */
+}
+
+.primary:active {
+  transform: translateY(1px);
+}
+
+.linkbtn {
+  background: transparent;
+  color: #a78bfa; /* purple-400 */
+  border: none;
+  padding: 0;
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Thank you */
+.thankyou {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.thankyou-head {
+  font-family: "Zeyada", cursive;
+  color: #a78bfa;
+  font-size: 28px;
+  font-weight: 700;
+  text-shadow: 0.6px 0.6px 0 #8b5cf6;
+  margin: 0;
+}
+
+.thankyou-copy {
+  color: #334155; /* slate-700 */
+  font-size: 14px;
+  margin: 0;
+}
+
+/* About */
+.about {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #334155; /* slate-700 */
+  font-size: 18px;
+}
+
+.about-accent {
+  color: #a78bfa;
+}
