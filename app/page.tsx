@@ -180,4 +180,10 @@ export default function Page() {
     </main>
   );
 }
+<footer className="footer">
+  <p>
+    Payments are processed securely through BillHighway.
+    GreekGive does not store or handle payment information.
+  </p>
+</footer>
 ``
