@@ -5,7 +5,7 @@ export default function QRPage() {
         <h1 className="brand">GreekGive</h1>
         <p className="tagline">Support our philanthropy in seconds.</p>
 
-        /
+        <a href="/" className="primary">
           Donate Now
         </a>
       </div>
