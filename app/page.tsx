@@ -1,8 +1,10 @@
-export default function Page() {
+export default function Home() {
   return (
-    <main style={{ padding: 40 }}>
-      <h1>GreekGive</h1>
-      <p>Fundraising, made simple.</p>
+    <main className="page">
+      <section className="hero">
+        <h1 className="brand">GreekGive</h1>
+        <p className="tagline">Fundraising, made simple.</p>
+      </section>
     </main>
   );
 }
