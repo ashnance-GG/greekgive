@@ -9,7 +9,6 @@ type Submission = {
   timestamp: string;
 };
 
-// In‑memory storage (pilot‑safe)
 const submissions: Submission[] = [];
 
 export async function POST(req: Request) {
@@ -27,7 +26,6 @@ export async function POST(req: Request) {
   return NextResponse.json({ success: true });
 }
 
-// Export for the CSV route to read
 export function getSubmissions() {
   return submissions;
 }
