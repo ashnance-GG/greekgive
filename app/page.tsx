@@ -11,7 +11,7 @@ export default function Home() {
       <section className="card">
         <header className="header">
           <h1 className="brand">greekgive</h1>
-          <p className="tagline">Fundraising, made simple.</p>
+          <p className="tagline">Fundraising, Made Simple.</p>
         </header>
 
         <div className="tabs">
