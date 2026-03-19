@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -36,10 +37,7 @@ export default function Home() {
               className="input"
               placeholder="Donation Amount (minimum $5)"
             />
-            <input
-              className="input"
-              placeholder="Your Chapter (optional)"
-            />
+            <input className="input" placeholder="Your Chapter (optional)" />
 
             <button type="button" className="primary">
               Continue to Payment
@@ -50,13 +48,13 @@ export default function Home() {
         {tab === "about" && (
           <div className="about">
             <p>
-              GreekGive was created to make fundraising easier for Greek
-              organizations and the people who support them.
+              greekgive was created to make fundraising easier, calmer, and more
+              transparent for Greek organizations and the people who support
+              them.
             </p>
             <p>
-              Donations are designed to be simple, transparent, and secure,
-              while keeping chapters compliant with university and national
-              policies.
+              Our goal is to remove friction from giving while maintaining
+              compliance with university and national policies.
             </p>
             <p className="accent">
               Built by Greek women, for Greek organizations.
