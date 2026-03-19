@@ -9,41 +9,111 @@ body {
   padding: 0;
 }
 
-/* Background exactly like your screenshot */
+/* Lavender background */
 body {
   min-height: 100vh;
   background: linear-gradient(
     to bottom,
-    #f4eaff 0%,
-    #f8f1ff 25%,
-    #f4eaff 50%,
-    #f8f1ff 75%,
-    #f4eaff 100%
+    #f3e8ff 0%,
+    #f8f1ff 50%,
+    #f3e8ff 100%
   );
   font-family: "Arapey", "Times New Roman", serif;
-  color: #111;
+  color: #1f2937;
 }
 
 /* Page layout */
 .page {
-  padding: 48px 56px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 48px 16px;
 }
 
-/* Hero section */
-.hero {
-  max-width: 600px;
+/* Card container */
+.card {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 32px 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
-/* GreekGive logo text */
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
 .brand {
   font-family: "Zeyada", cursive;
-  font-size: 56px;
-  font-weight: 700; /* simulated bold */
-  margin: 0 0 8px 0;
+  font-size: 52px;
+  margin: 0;
 }
 
-/* Tagline */
 .tagline {
-  font-size: 18px;
-  margin: 0;
+  font-size: 16px;
+  margin: 4px 0 0 0;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.tab {
+  border: 2px solid #c4b5fd;
+  background: transparent;
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-family: "Zeyada", cursive;
+  font-size: 22px;
+  cursor: pointer;
+  color: #6d28d9;
+}
+
+.tab.active {
+  background: #c4b5fd;
+  color: #3b0764;
+}
+
+/* Form */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.input {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1.5px solid #d1d5db;
+  font-size: 14px;
+}
+
+.primary {
+  margin-top: 8px;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background: #a78bfa;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+/* About */
+.about {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.accent {
+  color: #6d28d9;
+  margin-top: 12px;
 }
