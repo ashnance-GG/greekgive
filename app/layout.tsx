@@ -15,8 +15,8 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link
-          href="https://fonts.googleapis.com/css2?family=Zeyada&family=Arapey&display=swap"
           rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Zeyada&family=Arapey&display=swap"
         />
       </head>
       <body>{children}</body>
