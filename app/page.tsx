@@ -56,14 +56,35 @@ export default function Home() {
               />
               <input className="input" placeholder="Your Chapter (optional)" />
 
-              <button
-                type="button"
-                className="primary"
-                onClick={() => {
-                  // ✅ BillHighway ready — just paste the link later
-                  // window.location.href = "https://YOUR-BILLHIGHWAY-LINK";
-                  alert("BillHighway link will go here.");
-                }}
+             <button
+  type="button"
+  className="primary"
+  onClick={async () => {
+    await fetch("/api/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: document.querySelector<HTMLInputElement>(
+          'input[placeholder="Your Name"]'
+        )?.value,
+        email: document.querySelector<HTMLInputElement>(
+          'input[placeholder="Email Address"]'
+        )?.value,
+        amount: document.querySelector<HTMLInputElement>(
+          'input[placeholder="Donation Amount (minimum $5)"]'
+        )?.value,
+        chapter: document.querySelector<HTMLInputElement>(
+          'input[placeholder="Your Chapter (optional)"]'
+        )?.value,
+        source: "web",
+      }),
+    });
+
+    alert("Submission saved! BillHighway will be connected next.");
+  }}
+>
+  Continue to Payment
+</button>
               >
                 Continue to Payment
               </button>
