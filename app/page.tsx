@@ -1,10 +1,10 @@
-
 "use client";
 
 import { useState } from "react";
 
 export default function Home() {
   const [tab, setTab] = useState<"donate" | "about">("donate");
+  const [amount, setAmount] = useState("");
 
   return (
     <main className="page">
@@ -29,38 +29,63 @@ export default function Home() {
           </button>
         </div>
 
-        {tab === "donate" && (
-          <form className="form">
-            <input className="input" placeholder="Your Name" />
-            <input className="input" placeholder="Email Address" />
-            <input
-              className="input"
-              placeholder="Donation Amount (minimum $5)"
-            />
-            <input className="input" placeholder="Your Chapter (optional)" />
+        <div className="panel">
+          {tab === "donate" && (
+            <form className="form">
+              {/* Preset amounts */}
+              <div className="amounts">
+                {["5", "10", "25"].map((val) => (
+                  <button
+                    key={val}
+                    type="button"
+                    className={amount === val ? "amount active" : "amount"}
+                    onClick={() => setAmount(val)}
+                  >
+                    ${val}
+                  </button>
+                ))}
+              </div>
 
-            <button type="button" className="primary">
-              Continue to Payment
-            </button>
-          </form>
-        )}
+              <input className="input" placeholder="Your Name" />
+              <input className="input" placeholder="Email Address" />
+              <input
+                className="input"
+                placeholder="Donation Amount (minimum $5)"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+              />
+              <input className="input" placeholder="Your Chapter (optional)" />
 
-        {tab === "about" && (
-          <div className="about">
-            <p>
-              greekgive was created to make fundraising easier, calmer, and more
-              transparent for Greek organizations and the people who support
-              them.
-            </p>
-            <p>
-              Our goal is to remove the difficulty from giving while maintaining
-              compliance with university and national policies.
-            </p>
-            <p className="accent">
-              Built by Greek women, for Greek organizations.
-            </p>
-          </div>
-        )}
+              <button
+                type="button"
+                className="primary"
+                onClick={() => {
+                  // ✅ BillHighway ready — just paste the link later
+                  // window.location.href = "https://YOUR-BILLHIGHWAY-LINK";
+                  alert("BillHighway link will go here.");
+                }}
+              >
+                Continue to Payment
+              </button>
+            </form>
+          )}
+
+          {tab === "about" && (
+            <div className="about">
+              <p>
+                greekgive makes philanthropy calmer, cleaner, and more accessible
+                for Greek organizations and their supporters.
+              </p>
+              <p>
+                Our goal is to remove friction from giving while keeping chapters
+                compliant and donors confident.
+              </p>
+              <p className="accent">
+                Built by Greek women, for Greek organizations.
+              </p>
+            </div>
+          )}
+        </div>
       </section>
     </main>
   );
