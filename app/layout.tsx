@@ -1,5 +1,16 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import { Zeyada, Arapey } from "next/font/google";
+
+const zeyada = Zeyada({
+  subsets: ["latin"],
+  weight: "400",
+});
+
+const arapey = Arapey({
+  subsets: ["latin"],
+  weight: "400",
+});
 
 export const metadata: Metadata = {
   title: "greekgive",
@@ -13,13 +24,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Zeyada&family=Arapey&display=swap"
-        />
-      </head>
-      <body>{children}</body>
+      <body className={`${zeyada.className} ${arapey.className}`}>
+        {children}
+      </body>
     </html>
   );
 }
