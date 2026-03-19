@@ -1,4 +1,4 @@
-/* Base reset */
+/* Reset */
 * {
   box-sizing: border-box;
 }
@@ -9,17 +9,12 @@ body {
   padding: 0;
 }
 
-/* Lavender background */
+/* Background */
 body {
   min-height: 100vh;
-  background: linear-gradient(
-    to bottom,
-    #f3e8ff 0%,
-    #f8f1ff 50%,
-    #f3e8ff 100%
-  );
+  background-color: #efd7cf; /* peach protein */
   font-family: "Arapey", "Times New Roman", serif;
-  color: #1f2937;
+  color: #3f3f2f;
 }
 
 /* Page layout */
@@ -31,78 +26,87 @@ body {
   padding: 48px 16px;
 }
 
-/* Card container */
+/* Card */
 .card {
   width: 100%;
   max-width: 420px;
-  background: #ffffff;
-  border-radius: 20px;
+  background: #fff8ef; /* coconut cream */
+  border-radius: 22px;
   padding: 32px 24px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
 }
 
 /* Header */
 .header {
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 .brand {
   font-family: "Zeyada", cursive;
-  font-size: 52px;
+  font-size: 54px;
+  color: #818263; /* savory sage */
   margin: 0;
 }
 
 .tagline {
-  font-size: 16px;
-  margin: 4px 0 0 0;
+  font-size: 17px;
+  margin: 6px 0 0 0;
+  color: #6f7055;
 }
 
 /* Tabs */
 .tabs {
   display: flex;
   justify-content: center;
-  gap: 12px;
-  margin-bottom: 24px;
+  gap: 14px;
+  margin-bottom: 26px;
 }
 
 .tab {
-  border: 2px solid #c4b5fd;
+  border: 2px solid #c2c395; /* avocado smoothie */
   background: transparent;
-  padding: 8px 20px;
+  padding: 8px 22px;
   border-radius: 999px;
   font-family: "Zeyada", cursive;
   font-size: 22px;
   cursor: pointer;
-  color: #6d28d9;
+  color: #818263;
 }
 
 .tab.active {
-  background: #c4b5fd;
-  color: #3b0764;
+  background: #c2c395; /* avocado smoothie */
+  color: #3f3f2f;
 }
 
 /* Form */
 .form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 .input {
   padding: 12px 14px;
-  border-radius: 10px;
-  border: 1.5px solid #d1d5db;
+  border-radius: 12px;
+  border: 1.5px solid #d4d6b5;
   font-size: 14px;
+  font-family: "Arapey", serif;
 }
 
+.input::placeholder {
+  color: #c2c395; /* avocado smoothie */
+  opacity: 1;
+}
+
+/* Button */
 .primary {
-  margin-top: 8px;
+  margin-top: 10px;
   padding: 12px;
-  border-radius: 12px;
+  border-radius: 14px;
   border: none;
-  background: #a78bfa;
-  color: white;
+  background: #818263; /* savory sage */
+  color: #fff8ef;
   font-size: 15px;
   cursor: pointer;
 }
@@ -114,6 +118,6 @@ body {
 }
 
 .accent {
-  color: #6d28d9;
-  margin-top: 12px;
+  color: #818263;
+  margin-top: 14px;
 }
