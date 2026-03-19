@@ -53,7 +53,7 @@ export default function Home() {
               them.
             </p>
             <p>
-              Our goal is to remove friction from giving while maintaining
+              Our goal is to remove the difficulty from giving while maintaining
               compliance with university and national policies.
             </p>
             <p className="accent">
