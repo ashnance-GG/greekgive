@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function Home() {
+export default function Page() {
   const [tab, setTab] = useState<"donate" | "about">("donate");
   const [form, setForm] = useState({
     name: "",
@@ -10,6 +10,42 @@ export default function Home() {
     amount: "",
     chapter: "",
   });
+
+  const downloadCSV = () => {
+    const rows = [
+      [
+        "Timestamp",
+        "Name",
+        "Email",
+        "Amount",
+        "Chapter",
+        "Source",
+      ],
+      [
+        new Date().toISOString(),
+        form.name,
+        form.email,
+        form.amount,
+        form.chapter,
+        "web",
+      ],
+    ];
+
+    const csv = rows
+      .map((row) => row.map((cell) => `"${cell}"`).join(","))
+      .join("\n");
+
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", "greekgive-donations.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <main className="page">
@@ -19,6 +55,7 @@ export default function Home() {
           <p className="tagline">Fundraising, Made Simple.</p>
         </header>
 
+        {/* Tabs */}
         <div className="tabs">
           <button
             className={tab === "donate" ? "tab active" : "tab"}
@@ -34,80 +71,88 @@ export default function Home() {
           </button>
         </div>
 
+        {/* Donate */}
         {tab === "donate" && (
-          <form className="form">
-            {/* Preset amounts */}
-            <div className="amounts">
-              {["5", "10", "25"].map((val) => (
-                <button
-                  key={val}
-                  type="button"
-                  className={form.amount === val ? "amount active" : "amount"}
-                  onClick={() => setForm({ ...form, amount: val })}
-                >
-                  ${val}
-                </button>
-              ))}
-            </div>
-
-            <input
-              className="input"
-              placeholder="Your Name"
-              value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
-            />
-
-            <input
-              className="input"
-              placeholder="Email Address"
-              value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-            />
-
-            <input
-              className="input"
-              placeholder="Donation Amount (minimum $5)"
-              value={form.amount}
-              onChange={(e) => setForm({ ...form, amount: e.target.value })}
-            />
-
-            <input
-              className="input"
-              placeholder="Your Chapter (optional)"
-              value={form.chapter}
-              onChange={(e) => setForm({ ...form, chapter: e.target.value })}
-            />
-
-            <button
-              type="button"
-              className="primary"
-              onClick={async () => {
-                await fetch("/api/submit", {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({
-                    ...form,
-                    source: "web",
-                  }),
-                });
-
-                alert("Submission saved. Payment integration coming next.");
+          <div className="panel">
+            <form
+              className="form"
+              onSubmit={(e) => {
+                e.preventDefault();
+                downloadCSV();
+                alert("Donation recorded. Payment integration coming next.");
               }}
             >
-              Continue to Payment
-            </button>
-          </form>
+              {/* Preset amounts */}
+              <div className="amounts">
+                {["5", "10", "25"].map((val) => (
+                  <button
+                    key={val}
+                    type="button"
+                    className={
+                      form.amount === val ? "amount active" : "amount"
+                    }
+                    onClick={() =>
+                      setForm({ ...form, amount: val })
+                    }
+                  >
+                    ${val}
+                  </button>
+                ))}
+              </div>
+
+              <input
+                className="input"
+                placeholder="Your Name"
+                value={form.name}
+                onChange={(e) =>
+                  setForm({ ...form, name: e.target.value })
+                }
+              />
+
+              <input
+                className="input"
+                placeholder="Email Address"
+                value={form.email}
+                onChange={(e) =>
+                  setForm({ ...form, email: e.target.value })
+                }
+              />
+
+              <input
+                className="input"
+                placeholder="Donation Amount (minimum $5)"
+                value={form.amount}
+                onChange={(e) =>
+                  setForm({ ...form, amount: e.target.value })
+                }
+              />
+
+              <input
+                className="input"
+                placeholder="Your Chapter (optional)"
+                value={form.chapter}
+                onChange={(e) =>
+                  setForm({ ...form, chapter: e.target.value })
+                }
+              />
+
+              <button type="submit" className="primary">
+                Continue to Payment
+              </button>
+            </form>
+          </div>
         )}
 
+        {/* About */}
         {tab === "about" && (
-          <div className="about">
+          <div className="panel about">
             <p>
-              greekgive helps Greek organizations raise funds in a way that is
-              calm, transparent, and easy for donors.
+              greekgive makes fundraising calmer, cleaner, and more accessible
+              for Greek organizations and the people who support them.
             </p>
             <p>
               Donor information is collected separately from payment processing
-              to ensure security and compliance.
+              to ensure transparency and compliance.
             </p>
             <p className="accent">
               Built by Greek women, for Greek organizations.
