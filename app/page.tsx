@@ -12,28 +12,22 @@ export default function Page() {
   });
 
   const downloadCSV = () => {
-    // 🔍 Force visible values so we can diagnose
-    const safeForm = {
-      name: form.name || "TEST_NAME",
-      email: form.email || "test@email.com",
-      amount: form.amount || "10",
-      chapter: form.chapter || "TEST_CHAPTER",
-    };
-
+    // Build a single-row CSV with current form values
     const rows = [
       ["Timestamp", "Name", "Email", "Amount", "Chapter", "Source"],
       [
         new Date().toISOString(),
-        safeForm.name,
-        safeForm.email,
-        safeForm.amount,
-        safeForm.chapter,
+        form.name,
+        form.email,
+        form.amount,
+        form.chapter,
         "web",
       ],
     ];
 
+    // Quote cells and join
     const csv = rows
-      .map((row) => row.map((cell) => `"${cell}"`).join(","))
+      .map((row) => row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(","))
       .join("\n");
 
     const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
@@ -41,13 +35,12 @@ export default function Page() {
 
     const link = document.createElement("a");
     link.href = url;
+    // Unique filename so Excel can’t reuse an open file
     link.download = `greekgive-donations-${Date.now()}.csv`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
-
-    alert("CSV downloaded. This file MUST contain a data row.");
   };
 
   return (
@@ -58,6 +51,7 @@ export default function Page() {
           <p className="tagline">Fundraising, Made Simple.</p>
         </header>
 
+        {/* Tabs */}
         <div className="tabs">
           <button
             className={tab === "donate" ? "tab active" : "tab"}
@@ -73,7 +67,8 @@ export default function Page() {
           </button>
         </div>
 
-        {tab === "donate" && (
+        {/* CONDITIONAL CONTENT */}
+        {tab === "donate" ? (
           <div className="panel">
             {/* Preset amounts */}
             <div className="amounts">
@@ -93,55 +88,41 @@ export default function Page() {
               className="input"
               placeholder="Your Name"
               value={form.name}
-              onChange={(e) =>
-                setForm({ ...form, name: e.target.value })
-              }
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
             />
 
             <input
               className="input"
               placeholder="Email Address"
               value={form.email}
-              onChange={(e) =>
-                setForm({ ...form, email: e.target.value })
-              }
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
             />
 
             <input
               className="input"
               placeholder="Donation Amount (minimum $5)"
               value={form.amount}
-              onChange={(e) =>
-                setForm({ ...form, amount: e.target.value })
-              }
+              onChange={(e) => setForm({ ...form, amount: e.target.value })}
             />
 
             <input
               className="input"
               placeholder="Your Chapter (optional)"
               value={form.chapter}
-              onChange={(e) =>
-                setForm({ ...form, chapter: e.target.value })
-              }
+              onChange={(e) => setForm({ ...form, chapter: e.target.value })}
             />
 
-            <button
-              type="button"
-              className="primary"
-              onClick={downloadCSV}
-            >
+            <button type="button" className="primary" onClick={downloadCSV}>
               Continue to Payment
             </button>
-
-        {tab === "about" && (
+          </div>
+        ) : (
           <div className="panel about">
             <p>
               greekgive helps Greek organizations raise funds in a calm,
               transparent, and accessible way.
             </p>
-            <p className="accent">
-              Built by Greek women, for Greek organizations.
-            </p>
+            <p className="accent">Built by Greek women, for Greek organizations.</p>
           </div>
         )}
       </section>
