@@ -133,13 +133,6 @@ export default function Page() {
               Continue to Payment
             </button>
 
-            {/* 🔍 DEBUG PANEL (temporary) */}
-            <pre style={{ marginTop: 16, fontSize: 12 }}>
-              {JSON.stringify(form, null, 2)}
-            </pre>
-          </div>
-        )}
-
         {tab === "about" && (
           <div className="panel about">
             <p>
