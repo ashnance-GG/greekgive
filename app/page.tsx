@@ -12,10 +12,12 @@ export default function Page() {
   });
 
   const downloadCSV = () => {
+    const timestamp = new Date().toISOString();
+
     const rows = [
       ["Timestamp", "Name", "Email", "Amount", "Chapter", "Source"],
       [
-        new Date().toISOString(),
+        timestamp,
         form.name,
         form.email,
         form.amount,
@@ -33,14 +35,16 @@ export default function Page() {
 
     const link = document.createElement("a");
     link.href = url;
-    link.download = "greekgive-donations.csv";
+
+    // ✅ UNIQUE filename so Excel cannot reuse the old file
+    link.download = `greekgive-donations-${Date.now()}.csv`;
+
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-
     URL.revokeObjectURL(url);
 
-    alert("Donation info saved. Payment integration comes next.");
+    alert("Donation info saved. A new CSV file was downloaded.");
   };
 
   return (
@@ -68,7 +72,6 @@ export default function Page() {
 
         {tab === "donate" && (
           <div className="panel">
-            {/* Preset amounts */}
             <div className="amounts">
               {["5", "10", "25"].map((val) => (
                 <button
