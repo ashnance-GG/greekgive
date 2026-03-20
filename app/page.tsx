@@ -12,16 +12,22 @@ export default function Page() {
   });
 
   const downloadCSV = () => {
-    const timestamp = new Date().toISOString();
+    // 🔍 Force visible values so we can diagnose
+    const safeForm = {
+      name: form.name || "TEST_NAME",
+      email: form.email || "test@email.com",
+      amount: form.amount || "10",
+      chapter: form.chapter || "TEST_CHAPTER",
+    };
 
     const rows = [
       ["Timestamp", "Name", "Email", "Amount", "Chapter", "Source"],
       [
-        timestamp,
-        form.name,
-        form.email,
-        form.amount,
-        form.chapter,
+        new Date().toISOString(),
+        safeForm.name,
+        safeForm.email,
+        safeForm.amount,
+        safeForm.chapter,
         "web",
       ],
     ];
@@ -35,16 +41,13 @@ export default function Page() {
 
     const link = document.createElement("a");
     link.href = url;
-
-    // ✅ UNIQUE filename so Excel cannot reuse the old file
     link.download = `greekgive-donations-${Date.now()}.csv`;
-
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
 
-    alert("Donation info saved. A new CSV file was downloaded.");
+    alert("CSV downloaded. This file MUST contain a data row.");
   };
 
   return (
@@ -72,17 +75,14 @@ export default function Page() {
 
         {tab === "donate" && (
           <div className="panel">
+            {/* Preset amounts */}
             <div className="amounts">
               {["5", "10", "25"].map((val) => (
                 <button
                   key={val}
                   type="button"
-                  className={
-                    form.amount === val ? "amount active" : "amount"
-                  }
-                  onClick={() =>
-                    setForm({ ...form, amount: val })
-                  }
+                  className={form.amount === val ? "amount active" : "amount"}
+                  onClick={() => setForm({ ...form, amount: val })}
                 >
                   ${val}
                 </button>
@@ -132,6 +132,11 @@ export default function Page() {
             >
               Continue to Payment
             </button>
+
+            {/* 🔍 DEBUG PANEL (temporary) */}
+            <pre style={{ marginTop: 16, fontSize: 12 }}>
+              {JSON.stringify(form, null, 2)}
+            </pre>
           </div>
         )}
 
@@ -140,10 +145,6 @@ export default function Page() {
             <p>
               greekgive helps Greek organizations raise funds in a calm,
               transparent, and accessible way.
-            </p>
-            <p>
-              Donor information is collected separately from payment processing
-              to support compliance and trust.
             </p>
             <p className="accent">
               Built by Greek women, for Greek organizations.
