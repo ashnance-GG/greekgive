@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+const BILLHIGHWAY_URL = "https://YOUR-BILLHIGHWAY-LINK"; // <-- paste your real link here
+
 export default function Page() {
   const [tab, setTab] = useState<"donate" | "about">("donate");
   const [form, setForm] = useState({
@@ -12,7 +14,6 @@ export default function Page() {
   });
 
   const downloadCSV = () => {
-    // Build a single-row CSV with current form values
     const rows = [
       ["Timestamp", "Name", "Email", "Amount", "Chapter", "Source"],
       [
@@ -25,9 +26,10 @@ export default function Page() {
       ],
     ];
 
-    // Quote cells and join
     const csv = rows
-      .map((row) => row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(","))
+      .map((row) =>
+        row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(",")
+      )
       .join("\n");
 
     const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
@@ -35,12 +37,22 @@ export default function Page() {
 
     const link = document.createElement("a");
     link.href = url;
-    // Unique filename so Excel can’t reuse an open file
-    link.download = `greekgive-donations-${Date.now()}.csv`;
+    link.download = `greekgive-donations-${Date.now()}.csv`; // unique filename
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
+  };
+
+  const handleContinue = () => {
+    // 1) Save a local CSV row for chapter reporting
+    downloadCSV();
+    // 2) Redirect to BillHighway
+    if (BILLHIGHWAY_URL && BILLHIGHWAY_URL.startsWith("http")) {
+      window.location.href = BILLHIGHWAY_URL;
+    } else {
+      alert("BillHighway link is not set yet. Please add it in page.tsx.");
+    }
   };
 
   return (
@@ -112,7 +124,7 @@ export default function Page() {
               onChange={(e) => setForm({ ...form, chapter: e.target.value })}
             />
 
-            <button type="button" className="primary" onClick={downloadCSV}>
+            <button type="button" className="primary" onClick={handleContinue}>
               Continue to Payment
             </button>
           </div>
