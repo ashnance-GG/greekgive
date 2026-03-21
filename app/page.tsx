@@ -37,7 +37,7 @@ export default function Page() {
 
     const link = document.createElement("a");
     link.href = url;
-    link.download = `greekgive-donations-${Date.now()}.csv`; // unique filename
+    link.download = `greekgive-donations-${Date.now()}.csv`; // unique filename to avoid Excel caching
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -45,8 +45,9 @@ export default function Page() {
   };
 
   const handleContinue = () => {
-    // 1) Save a local CSV row for chapter reporting
+    // 1) Download local CSV row for chapter reporting
     downloadCSV();
+
     // 2) Redirect to BillHighway
     if (BILLHIGHWAY_URL && BILLHIGHWAY_URL.startsWith("http")) {
       window.location.href = BILLHIGHWAY_URL;
@@ -88,56 +89,3 @@ export default function Page() {
                 <button
                   key={val}
                   type="button"
-                  className={form.amount === val ? "amount active" : "amount"}
-                  onClick={() => setForm({ ...form, amount: val })}
-                >
-                  ${val}
-                </button>
-              ))}
-            </div>
-
-            <input
-              className="input"
-              placeholder="Your Name"
-              value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
-            />
-
-            <input
-              className="input"
-              placeholder="Email Address"
-              value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-            />
-
-            <input
-              className="input"
-              placeholder="Donation Amount (minimum $5)"
-              value={form.amount}
-              onChange={(e) => setForm({ ...form, amount: e.target.value })}
-            />
-
-            <input
-              className="input"
-              placeholder="Your Chapter (optional)"
-              value={form.chapter}
-              onChange={(e) => setForm({ ...form, chapter: e.target.value })}
-            />
-
-            <button type="button" className="primary" onClick={handleContinue}>
-              Continue to Payment
-            </button>
-          </div>
-        ) : (
-          <div className="panel about">
-            <p>
-              greekgive helps Greek organizations raise funds in a calm,
-              transparent, and accessible way.
-            </p>
-            <p className="accent">Built by Greek women, for Greek organizations.</p>
-          </div>
-        )}
-      </section>
-    </main>
-  );
-}
