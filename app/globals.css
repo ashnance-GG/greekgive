@@ -1,4 +1,6 @@
-/* Reset */
+/* =========================
+   Reset
+   ========================= */
 * {
   box-sizing: border-box;
 }
@@ -9,15 +11,19 @@ body {
   padding: 0;
 }
 
-/* Peach protein background */
+/* =========================
+   Base / Background
+   ========================= */
 body {
   min-height: 100vh;
-  background-color: #efd7cf;
-  font-family: "Arapey", serif;
-  color: #3f3f2f;
+  background-color: #efd7cf;        /* peach protein */
+  font-family: "Arapey", serif;     /* Arapey as body font */
+  color: #3f3f2f;                   /* deep slate/olive text */
 }
 
-/* Layout */
+/* =========================
+   Page Layout
+   ========================= */
 .page {
   min-height: 100vh;
   display: flex;
@@ -28,33 +34,37 @@ body {
 /* Card */
 .card {
   width: 100%;
-  max-width: 480px;
-  background: #fff8ef;
+  max-width: 480px;                 /* bump to 520px if you want it wider */
+  background: #fff8ef;              /* coconut cream */
   border-radius: 22px;
   padding: 40px 32px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
 }
 
-/* Header */
+/* =========================
+   Header
+   ========================= */
 .header {
   text-align: center;
   margin-bottom: 28px;
 }
 
 .brand {
-  font-family: "Zeyada", cursive;
+  font-family: "Zeyada", cursive;   /* Zeyada for logo */
   font-size: 56px;
-  color: #818263;
+  color: #818263;                   /* savory sage */
   margin: 0;
 }
 
 .tagline {
   font-size: 17px;
   margin-top: 6px;
-  color: #6f7055;
+  color: #6f7055;                   /* muted olive for tagline */
 }
 
-/* Tabs */
+/* =========================
+   Tabs
+   ========================= */
 .tabs {
   display: flex;
   justify-content: center;
@@ -63,40 +73,36 @@ body {
 }
 
 .tab {
-  border: 2px solid #c2c395;
+  border: 2px solid #c2c395;        /* avocado smoothie */
   background: transparent;
   padding: 8px 22px;
   border-radius: 999px;
   font-family: "Zeyada", cursive;
   font-size: 22px;
   cursor: pointer;
-  color: #818263;
+  color: #818263;                   /* sage text */
 }
 
 .tab.active {
-  background: #c2c395;
+  background: #c2c395;              /* avocado smoothie */
   color: #3f3f2f;
 }
 
-/* Animated panel */
+/* Slight entrance fade for content swaps */
 .panel {
   animation: fade 0.25s ease;
 }
 
 @keyframes fade {
-  from {
-    opacity: 0;
-    transform: translateY(4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Preset amounts */
+/* =========================
+   Preset Amounts
+   ========================= */
 .amounts {
-  display: flex;
+  display: flex;                    /* keep on one row */
   gap: 10px;
   margin-bottom: 10px;
 }
@@ -116,44 +122,26 @@ body {
   color: #3f3f2f;
 }
 
-/* Form */
+/* Allow wrap on very small screens (optional) */
+/*
+@media (max-width: 360px) {
+  .amounts { flex-wrap: wrap; }
+  .amount { flex: 0 0 30%; }
+}
+*/
+
+/* =========================
+   Form (STACKED FIELDS)
+   ========================= */
 .form {
-  display: flex;
+  display: flex;                    /* force vertical stack */
   flex-direction: column;
-  gap: 14px;
+  gap: 14px;                        /* vertical spacing between rows */
 }
 
 .input {
+  display: block;                   /* ensure each field occupies its own line */
+  width: 100%;                      /* full width row */
   padding: 12px 14px;
   border-radius: 12px;
-  border: 1.5px solid #d4d6b5;
-  font-size: 14px;
-}
-
-.input::placeholder {
-  color: #c2c395;
-  opacity: 1;
-}
-
-/* Button */
-.primary {
-  margin-top: 10px;
-  padding: 12px;
-  border-radius: 14px;
-  border: none;
-  background: #818263;
-  color: #fff8ef;
-  font-size: 15px;
-  cursor: pointer;
-}
-
-/* About */
-.about {
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-.accent {
-  color: #818263;
-  margin-top: 14px;
-}
+  border:
