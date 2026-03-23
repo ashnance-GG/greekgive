@@ -2,152 +2,61 @@
 
 import { useState } from "react";
 
-const BILLHIGHWAY_URL = "https://YOUR-BILLHIGHWAY-LINK"; // <-- paste your real link
+export default function Home() {
+  const [amount, setAmount] = useState("");
+  const [showThankYou, setShowThankYou] = useState(false);
 
-export default function Page() {
-  const [tab, setTab] = useState<"donate" | "about">("donate");
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    amount: "",
-    chapter: "",
-  });
-
-  const downloadCSV = () => {
-    const rows = [
-      ["Timestamp", "Name", "Email", "Amount", "Chapter", "Source"],
-      [
-        new Date().toISOString(),
-        form.name,
-        form.email,
-        form.amount,
-        form.chapter,
-        "web",
-      ],
+  const handleExport = () => {
+    const data = [
+      ["Donation Amount"],
+      [amount],
     ];
 
-    const csv = rows
-      .map((row) =>
-        row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(",")
-      )
-      .join("\n");
-
-    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
+    const csvContent =
+      "data:text/csv;charset=utf-8," +
+      data.map((e) => e.join(",")).join("\n");
 
     const link = document.createElement("a");
-    link.href = url;
-    link.download = `greekgive-donations-${Date.now()}.csv`; // unique filename
-    document.body.appendChild(link);
+    link.href = encodeURI(csvContent);
+    link.download = "greekgive-donations.csv";
     link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
   };
 
   const handleContinue = () => {
-    // 1) Download local CSV row for chapter reporting
-    downloadCSV();
-
-    // 2) Redirect to BillHighway (set your real link above)
-    if (BILLHIGHWAY_URL && BILLHIGHWAY_URL.startsWith("http")) {
-      window.location.href = BILLHIGHWAY_URL;
-    } else {
-      alert("BillHighway link is not set yet. Please add it in page.tsx.");
-    }
+    setShowThankYou(true);
+    // Later: add BillHighway redirect here
   };
 
   return (
-    <main className="page">
-      <section className="card">
-        <header className="header">
-          <h1 className="brand">greekgive</h1>
-          <p className="tagline">Fundraising, Made Simple.</p>
-        </header>
+    <main
+      style={{
+        maxWidth: "480px",
+        margin: "0 auto",
+        padding: "24px",
+        fontFamily: "Arapey, serif",
+        color: "#2f4f2f",
+      }}
+    >
+      {/* HEADER */}
+      <h1
+        style={{
+          fontFamily: "Zeyada, cursive",
+          fontSize: "48px",
+          color: "#2f4f2f",
+          textAlign: "center",
+          marginBottom: "8px",
+        }}
+      >
+        greekgive
+      </h1>
 
-        {/* Tabs */}
-        <div className="tabs">
-          <button
-            className={tab === "donate" ? "tab active" : "tab"}
-            onClick={() => setTab("donate")}
-          >
-            Donate
-          </button>
-          <button
-            className={tab === "about" ? "tab active" : "tab"}
-            onClick={() => setTab("about")}
-          >
-            About
-          </button>
-        </div>
+      <p
+        style={{
+          textAlign: "center",
+          fontSize: "20px",
+          marginBottom: "28px",
+        }}
+      >
+        Fundraising, Made Simple.
+      </p>
 
-        {/* CONDITIONAL CONTENT */}
-        {tab === "donate" ? (
-          <div className="panel">
-            {/* Preset amounts */}
-            <div className="amounts">
-              {["5", "10", "25"].map((val) => (
-                <button
-                  key={val}
-                  type="button"
-                  className={form.amount === val ? "amount active" : "amount"}
-                  onClick={() => setForm({ ...form, amount: val })}
-                >
-                  ${val}
-                </button>
-              ))}
-            </div>
-
-            {/* STACKED FIELDS */}
-            <div className="form">
-              <input
-                className="input"
-                placeholder="Your Name"
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-              />
-
-              <input
-                className="input"
-                placeholder="Email Address"
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-              />
-
-              <input
-                className="input"
-                placeholder="Donation Amount (minimum $5)"
-                value={form.amount}
-                onChange={(e) => setForm({ ...form, amount: e.target.value })}
-              />
-
-              <input
-                className="input"
-                placeholder="Your Chapter (optional)"
-                value={form.chapter}
-                onChange={(e) => setForm({ ...form, chapter: e.target.value })}
-              />
-
-              <button type="button" className="primary" onClick={handleContinue}>
-                Continue to Payment
-              </button>
-
-              {/* Trust note */}
-              <p className="trustnote">
-                Payments are processed securely through BillHighway. GreekGive never
-                stores payment details.
-              </p>
-            </div>
-          </div>
-        ) : (
-          <div className="panel about">
-            <p>
-              greekgive helps Greek organizations raise funds in a calm,
-              transparent, and accessible way.
-            </p>
-            <p className="accent">Built by Greek women, for Greek organizations.</p>
-          </div>
-        )}
-      </section>
-    </main>
-  );
-}
