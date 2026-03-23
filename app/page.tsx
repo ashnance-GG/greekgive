@@ -24,7 +24,7 @@ export default function Home() {
 
   const handleContinue = () => {
     setShowThankYou(true);
-    // Later: add BillHighway redirect here
+    // BillHighway redirect goes here later
   };
 
   return (
@@ -60,7 +60,7 @@ export default function Home() {
         Fundraising, Made Simple.
       </p>
 
-      {/* DONATION AMOUNT FIELD */}
+      {/* DONATION AMOUNT */}
       <label style={{ fontWeight: 600 }}>Donation Amount</label>
       <input
         type="number"
@@ -77,7 +77,7 @@ export default function Home() {
         }}
       />
 
-      {/* PRESET BUTTONS */}
+      {/* PRESETS */}
       <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
         {[5, 10, 25].map((val) => (
           <button
@@ -116,7 +116,7 @@ export default function Home() {
         Continue to Payment
       </button>
 
-      {/* THANK YOU MESSAGE */}
+      {/* THANK YOU */}
       {showThankYou && (
         <div
           style={{
@@ -134,7 +134,7 @@ export default function Home() {
         </div>
       )}
 
-      {/* EXPORT BUTTON */}
+      {/* EXPORT */}
       <button
         onClick={handleExport}
         style={{
@@ -152,7 +152,7 @@ export default function Home() {
         Export to Excel
       </button>
 
-      {/* SOCIAL SHARE SECTION */}
+      {/* SOCIAL SHARE */}
       <div
         style={{
           marginTop: "10px",
@@ -181,7 +181,6 @@ export default function Home() {
             flexWrap: "wrap",
           }}
         >
-          {/* Instagram */}
           <button
             onClick={() => {
               navigator.clipboard.writeText(window.location.href);
@@ -199,7 +198,6 @@ export default function Home() {
             📸 Instagram
           </button>
 
-          {/* Facebook */}
           <button
             onClick={() => {
               const url = encodeURIComponent(window.location.href);
@@ -220,7 +218,6 @@ export default function Home() {
             👍 Facebook
           </button>
 
-          {/* Copy Link */}
           <button
             onClick={() =>
               navigator.clipboard.writeText(window.location.href)
