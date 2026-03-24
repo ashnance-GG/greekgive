@@ -18,7 +18,7 @@ export default function Home() {
     <div
       style={{
         minHeight: "100vh",
-        backgroundColor: "#EFD7CF", // Peach Protein
+        backgroundColor: "#EFD7CF",
         display: "flex",
         justifyContent: "center",
         alignItems: "flex-start",
@@ -28,7 +28,7 @@ export default function Home() {
     >
       <div
         style={{
-          backgroundColor: "#F7EFE7", // Light Oat Latte
+          backgroundColor: "#F7EFE7",
           borderRadius: "22px",
           padding: "50px 30px 70px 30px",
           width: "100%",
@@ -43,7 +43,7 @@ export default function Home() {
             fontFamily: "Zeyada, cursive",
             fontSize: "58px",
             color: "#818263",
-            marginBottom: "6px", // reduced space
+            marginBottom: "4px", 
           }}
         >
           greekgive
@@ -53,7 +53,7 @@ export default function Home() {
           style={{
             fontSize: "22px",
             color: "#818263",
-            marginBottom: "24px", // smaller gap
+            marginBottom: "16px", 
           }}
         >
           Fundraising, made simple.
@@ -62,58 +62,65 @@ export default function Home() {
         {/* DONATE / ABOUT TOGGLE */}
         <div
           style={{
-            background: "#F7EFE7",
-            padding: "6px",
             display: "flex",
-            borderRadius: "12px",
-            marginBottom: "28px",
+            marginBottom: "26px",
+            borderRadius: "14px",
+            overflow: "hidden",
+            border: "2px solid #818263",
           }}
         >
+          {/* DONATE TAB */}
           <button
             onClick={() => setActiveTab("donate")}
             style={{
               flex: 1,
-              padding: "10px",
-              borderRadius: "10px",
+              padding: "10px 0",
+              background: activeTab === "donate" ? "#818263" : "#C2C395",
+              color: activeTab === "donate" ? "white" : "#4A4A3F",
+              fontSize: "15px",
+              fontWeight: 600,
               border: "none",
               cursor: "pointer",
-              background: activeTab === "donate" ? "#818263" : "transparent",
-              color: activeTab === "donate" ? "white" : "#818263",
-              fontSize: "16px",
-              fontWeight: 600,
             }}
           >
             Donate
           </button>
 
+          {/* DIVIDING LINE */}
+          <div
+            style={{
+              width: "2px",
+              backgroundColor: "#818263",
+            }}
+          />
+
+          {/* ABOUT TAB */}
           <button
             onClick={() => (window.location.href = "/about")}
             style={{
               flex: 1,
-              padding: "10px",
-              borderRadius: "10px",
+              padding: "10px 0",
+              background: activeTab === "about" ? "#818263" : "#C2C395",
+              color: activeTab === "about" ? "white" : "#4A4A3F",
+              fontSize: "15px",
+              fontWeight: 600,
               border: "none",
               cursor: "pointer",
-              background: activeTab === "about" ? "#818263" : "transparent",
-              color: activeTab === "about" ? "white" : "#818263",
-              fontSize: "16px",
-              fontWeight: 600,
             }}
           >
             About
           </button>
         </div>
 
-        {/* DONATE TAB CONTENT */}
+        {/* DONATE FORM */}
         {activeTab === "donate" && (
           <>
-
             {/* NAME */}
             <label
               style={{
                 fontWeight: 600,
                 color: "#818263",
-                fontSize: "18px",
+                fontSize: "17px",
                 display: "block",
                 textAlign: "left",
                 marginBottom: "6px",
@@ -131,8 +138,8 @@ export default function Home() {
                 padding: "14px",
                 borderRadius: "12px",
                 border: "1px solid #b8b4a6",
-                fontSize: "18px",
-                marginBottom: "20px",
+                fontSize: "17px",
+                marginBottom: "18px",
               }}
             />
 
@@ -141,7 +148,7 @@ export default function Home() {
               style={{
                 fontWeight: 600,
                 color: "#818263",
-                fontSize: "18px",
+                fontSize: "17px",
                 display: "block",
                 textAlign: "left",
                 marginBottom: "6px",
@@ -159,17 +166,17 @@ export default function Home() {
                 padding: "14px",
                 borderRadius: "12px",
                 border: "1px solid #b8b4a6",
-                fontSize: "18px",
-                marginBottom: "20px",
+                fontSize: "17px",
+                marginBottom: "18px",
               }}
             />
 
-            {/* CHAPTER NAME (Optional) */}
+            {/* CHAPTER NAME */}
             <label
               style={{
                 fontWeight: 600,
                 color: "#818263",
-                fontSize: "18px",
+                fontSize: "17px",
                 display: "block",
                 textAlign: "left",
                 marginBottom: "6px",
@@ -187,8 +194,8 @@ export default function Home() {
                 padding: "14px",
                 borderRadius: "12px",
                 border: "1px solid #b8b4a6",
-                fontSize: "18px",
-                marginBottom: "20px",
+                fontSize: "17px",
+                marginBottom: "18px",
               }}
             />
 
@@ -197,7 +204,7 @@ export default function Home() {
               style={{
                 fontWeight: 600,
                 color: "#818263",
-                fontSize: "18px",
+                fontSize: "17px",
                 display: "block",
                 textAlign: "left",
                 marginBottom: "6px",
@@ -215,8 +222,8 @@ export default function Home() {
                 padding: "14px",
                 borderRadius: "12px",
                 border: "1px solid #b8b4a6",
-                fontSize: "18px",
-                marginBottom: "20px",
+                fontSize: "17px",
+                marginBottom: "18px",
               }}
             />
 
@@ -224,8 +231,8 @@ export default function Home() {
             <div
               style={{
                 display: "flex",
-                gap: "12px",
-                marginBottom: "24px",
+                gap: "10px",
+                marginBottom: "22px",
               }}
             >
               {[5, 10, 25].map((val) => (
@@ -236,9 +243,9 @@ export default function Home() {
                     flex: 1,
                     background: "#818263",
                     borderRadius: "10px",
-                    padding: "12px 0",
+                    padding: "10px 0",
                     color: "white",
-                    fontSize: "17px",
+                    fontSize: "16px",
                     border: "none",
                     cursor: "pointer",
                   }}
@@ -254,14 +261,14 @@ export default function Home() {
               style={{
                 width: "100%",
                 background: "#C2C395",
-                padding: "16px",
+                padding: "14px",
                 borderRadius: "14px",
-                fontSize: "20px",
+                fontSize: "19px",
                 fontWeight: 600,
                 border: "none",
                 color: "#4A4A3F",
                 cursor: "pointer",
-                marginBottom: "30px",
+                marginBottom: "26px",
               }}
             >
               Continue to Payment
@@ -273,12 +280,18 @@ export default function Home() {
                 style={{
                   background: "#e9f5e3",
                   borderRadius: "14px",
-                  padding: "18px",
+                  padding: "16px",
                   border: "1px solid #b5d6a3",
-                  marginBottom: "32px",
+                  marginBottom: "28px",
                 }}
               >
-                <p style={{ fontSize: "19px", fontWeight: 600, color: "#4A4A3F" }}>
+                <p
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: 600,
+                    color: "#4A4A3F",
+                  }}
+                >
                   Thank you so much for supporting our chapter! 💜
                 </p>
               </div>
@@ -305,7 +318,6 @@ export default function Home() {
                 Share this fundraiser
               </p>
 
-              {/* BERRY BUTTONS WITH SAGE BORDERS */}
               <div
                 style={{
                   display: "flex",
@@ -314,6 +326,7 @@ export default function Home() {
                   flexWrap: "wrap",
                 }}
               >
+                {/* Instagram */}
                 <button
                   onClick={() => {
                     navigator.clipboard.writeText(window.location.href);
@@ -332,6 +345,7 @@ export default function Home() {
                   Instagram
                 </button>
 
+                {/* Facebook */}
                 <button
                   onClick={() => {
                     const url = encodeURIComponent(window.location.href);
@@ -353,8 +367,11 @@ export default function Home() {
                   Facebook
                 </button>
 
+                {/* Copy Link */}
                 <button
-                  onClick={() => navigator.clipboard.writeText(window.location.href)}
+                  onClick={() =>
+                    navigator.clipboard.writeText(window.location.href)
+                  }
                   style={{
                     background: "#DDBAAE",
                     border: "2px solid #818263",
@@ -373,7 +390,7 @@ export default function Home() {
         )}
 
         {/* ADMIN LOGIN LINK */}
-        <div style={{ marginTop: "40px", textAlign: "center" }}>
+        <div style={{ marginTop: "34px", textAlign: "center" }}>
           <button
             onClick={() => (window.location.href = "/private/login")}
             style={{
