@@ -3,12 +3,14 @@
 import { useState } from "react";
 
 export default function Home() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [amount, setAmount] = useState("");
+  const [chapter, setChapter] = useState("");
   const [showThankYou, setShowThankYou] = useState(false);
 
   const handleContinue = () => {
     setShowThankYou(true);
-    // Add BillHighway redirect later
   };
 
   return (
@@ -23,10 +25,10 @@ export default function Home() {
         fontFamily: "Arapey, serif",
       }}
     >
-      {/* MAIN CARD */}
+      {/* MAIN ROUNDED PANEL */}
       <div
         style={{
-          backgroundColor: "#DCD4C1", // Oat Latte
+          backgroundColor: "#F7EFE7", // ✅ LIGHTER OAT LATTE (matches QR page)
           borderRadius: "22px",
           padding: "50px 30px 70px 30px",
           width: "100%",
@@ -40,7 +42,7 @@ export default function Home() {
           style={{
             fontFamily: "Zeyada, cursive",
             fontSize: "58px",
-            color: "#818263", // Savory Sage
+            color: "#818263",
             marginBottom: "10px",
           }}
         >
@@ -57,7 +59,63 @@ export default function Home() {
           Fundraising, made simple.
         </p>
 
-        {/* DONATION LABEL */}
+        {/* NAME */}
+        <label
+          style={{
+            fontWeight: 600,
+            color: "#818263",
+            fontSize: "18px",
+            display: "block",
+            textAlign: "left",
+            marginBottom: "6px",
+          }}
+        >
+          Name
+        </label>
+        <input
+          type="text"
+          placeholder="Your Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          style={{
+            width: "100%",
+            padding: "14px",
+            borderRadius: "12px",
+            border: "1px solid #b8b4a6",
+            fontSize: "18px",
+            marginBottom: "20px",
+          }}
+        />
+
+        {/* EMAIL */}
+        <label
+          style={{
+            fontWeight: 600,
+            color: "#818263",
+            fontSize: "18px",
+            display: "block",
+            textAlign: "left",
+            marginBottom: "6px",
+          }}
+        >
+          Email
+        </label>
+        <input
+          type="email"
+          placeholder="Your Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          style={{
+            width: "100%",
+            padding: "14px",
+            borderRadius: "12px",
+            border: "1px solid #b8b4a6",
+            fontSize: "18px",
+            marginBottom: "20px",
+          }}
+        />
+
+        {/* DONATION AMOUNT */}
         <label
           style={{
             fontWeight: 600,
@@ -70,8 +128,6 @@ export default function Home() {
         >
           Donation Amount
         </label>
-
-        {/* INPUT */}
         <input
           type="number"
           placeholder="$0.00"
@@ -101,7 +157,7 @@ export default function Home() {
               onClick={() => setAmount(String(val))}
               style={{
                 flex: 1,
-                background: "#818263", // Savory Sage
+                background: "#818263",
                 borderRadius: "10px",
                 padding: "12px 0",
                 color: "white",
@@ -114,6 +170,34 @@ export default function Home() {
             </button>
           ))}
         </div>
+
+        {/* CHAPTER NAME (OPTIONAL) */}
+        <label
+          style={{
+            fontWeight: 600,
+            color: "#818263",
+            fontSize: "18px",
+            display: "block",
+            textAlign: "left",
+            marginBottom: "6px",
+          }}
+        >
+          Chapter Name (Optional)
+        </label>
+        <input
+          type="text"
+          placeholder="e.g., Beta Zeta"
+          value={chapter}
+          onChange={(e) => setChapter(e.target.value)}
+          style={{
+            width: "100%",
+            padding: "14px",
+            borderRadius: "12px",
+            border: "1px solid #b8b4a6",
+            fontSize: "18px",
+            marginBottom: "26px",
+          }}
+        />
 
         {/* CONTINUE BUTTON */}
         <button
@@ -154,11 +238,11 @@ export default function Home() {
         {/* SHARE BLOCK */}
         <div
           style={{
-            backgroundColor: "#DCD4C1",
+            backgroundColor: "#F7EFE7", // ✅ LIGHTER OAT LATTE, matches panel
             padding: "20px",
             borderRadius: "14px",
             marginTop: "10px",
-            border: "1px solid #c9c2b0",
+            border: "1px solid #e2dacb",
           }}
         >
           <p
@@ -180,7 +264,6 @@ export default function Home() {
               flexWrap: "wrap",
             }}
           >
-            {/* Instagram */}
             <button
               onClick={() => {
                 navigator.clipboard.writeText(window.location.href);
@@ -199,7 +282,6 @@ export default function Home() {
               Instagram
             </button>
 
-            {/* Facebook */}
             <button
               onClick={() => {
                 const url = encodeURIComponent(window.location.href);
@@ -221,7 +303,6 @@ export default function Home() {
               Facebook
             </button>
 
-            {/* Copy Link */}
             <button
               onClick={() => navigator.clipboard.writeText(window.location.href)}
               style={{
@@ -260,4 +341,3 @@ export default function Home() {
     </div>
   );
 }
-``
