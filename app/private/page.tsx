@@ -1,8 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function AdminDashboard() {
+  const [copied, setCopied] = useState(false);
+
   useEffect(() => {
     const loggedIn = localStorage.getItem("greekgive_admin");
     if (!loggedIn) {
@@ -11,13 +13,18 @@ export default function AdminDashboard() {
   }, []);
 
   const handleExport = () => {
-    // Placeholder CSV logic — not connected to donations yet
     const csvContent =
       "data:text/csv;charset=utf-8,Name,Email,Amount,Chapter\n";
     const link = document.createElement("a");
     link.href = encodeURI(csvContent);
     link.download = "greekgive-donations.csv";
     link.click();
+  };
+
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText("https://greekgive.org");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
   };
 
   return (
@@ -34,7 +41,7 @@ export default function AdminDashboard() {
     >
       <div
         style={{
-          backgroundColor: "#F7EFE7", // Light Oat Latte
+          backgroundColor: "#F7EFE7", // Oat Latte
           borderRadius: "22px",
           padding: "50px 30px 70px 30px",
           width: "100%",
@@ -49,7 +56,7 @@ export default function AdminDashboard() {
             fontFamily: "Zeyada, cursive",
             fontSize: "54px",
             color: "#818263",
-            marginBottom: "6px",
+            marginBottom: "4px",
           }}
         >
           greekgive
@@ -65,23 +72,129 @@ export default function AdminDashboard() {
           Admin Dashboard
         </p>
 
-        {/* EXPORT SECTION */}
-        <h2
+        {/* COPY FUNDRAISER LINK */}
+        <button
+          onClick={handleCopyLink}
           style={{
-            color: "#818263",
-            fontSize: "20px",
+            width: "100%",
+            background: "#C2C395",
+            padding: "12px",
+            borderRadius: "12px",
+            fontSize: "17px",
+            border: "2px solid #818263",
+            color: "#4A4A3F",
+            cursor: "pointer",
+            marginBottom: "20px",
             fontWeight: 600,
-            marginBottom: "10px",
           }}
         >
-          Donation Data Tools
-        </h2>
+          {copied ? "Link Copied!" : "Copy Fundraiser Link"}
+        </button>
 
+        {/* STATS / TOTALS */}
+        <div
+          style={{
+            background: "#ffffffcc",
+            padding: "16px",
+            borderRadius: "14px",
+            border: "1px solid #d8d8d8",
+            marginBottom: "28px",
+            textAlign: "left",
+          }}
+        >
+          <h3
+            style={{
+              color: "#818263",
+              fontSize: "20px",
+              marginBottom: "10px",
+              fontWeight: 600,
+            }}
+          >
+            Fundraiser Stats
+          </h3>
+          <p style={{ marginBottom: "6px", color: "#4A4A3F" }}>
+            Total Donations: <strong>—</strong>
+          </p>
+          <p style={{ marginBottom: "6px", color: "#4A4A3F" }}>
+            Total Amount Raised: <strong>—</strong>
+          </p>
+          <p style={{ marginBottom: "6px", color: "#4A4A3F" }}>
+            Highest Donation: <strong>—</strong>
+          </p>
+        </div>
+
+        {/* VIEW DONATIONS TABLE (placeholder) */}
+        <div
+          style={{
+            background: "#ffffffcc",
+            padding: "16px",
+            borderRadius: "14px",
+            border: "1px solid #d8d8d8",
+            marginBottom: "28px",
+            textAlign: "left",
+          }}
+        >
+          <h3
+            style={{
+              color: "#818263",
+              fontSize: "20px",
+              marginBottom: "10px",
+              fontWeight: 600,
+            }}
+          >
+            Donation Records
+          </h3>
+
+          <p style={{ fontSize: "15px", opacity: 0.7, marginBottom: "10px" }}>
+            (Full donation log coming soon)
+          </p>
+
+          <table
+            style={{
+              width: "100%",
+              borderCollapse: "collapse",
+              fontSize: "15px",
+            }}
+          >
+            <thead>
+              <tr style={{ background: "#F7EFE7" }}>
+                <th style={{ padding: "6px", borderBottom: "1px solid #ccc" }}>
+                  Name
+                </th>
+                <th style={{ padding: "6px", borderBottom: "1px solid #ccc" }}>
+                  Amount
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td
+                  style={{
+                    padding: "8px",
+                    borderBottom: "1px solid #e6e6e6",
+                  }}
+                >
+                  —
+                </td>
+                <td
+                  style={{
+                    padding: "8px",
+                    borderBottom: "1px solid #e6e6e6",
+                  }}
+                >
+                  —
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        {/* EXPORT */}
         <button
           onClick={handleExport}
           style={{
             width: "100%",
-            background: "#818263", // Savory Sage
+            background: "#818263",
             padding: "14px",
             borderRadius: "14px",
             fontSize: "18px",
@@ -95,23 +208,12 @@ export default function AdminDashboard() {
           Export to Excel
         </button>
 
-        {/* QR LINK SECTION */}
-        <h2
-          style={{
-            color: "#818263",
-            fontSize: "20px",
-            fontWeight: 600,
-            marginBottom: "10px",
-          }}
-        >
-          QR Code
-        </h2>
-
+        {/* QR LINK */}
         <button
           onClick={() => (window.location.href = "/qr")}
           style={{
             width: "100%",
-            background: "#C2C395", // Avocado Smoothie
+            background: "#C2C395",
             padding: "12px",
             borderRadius: "12px",
             fontSize: "17px",
@@ -125,37 +227,52 @@ export default function AdminDashboard() {
           Open QR Page
         </button>
 
-        {/* FUTURE TOOLS PLACEHOLDER */}
-        <p
+        {/* RETURN HOME */}
+        <button
+          onClick={() => (window.location.href = "/")}
           style={{
-            color: "#4A4A3F",
-            fontSize: "15px",
-            opacity: 0.8,
+            background: "transparent",
+            border: "none",
+            color: "#818263",
+            fontSize: "16px",
+            textDecoration: "underline",
+            cursor: "pointer",
+            marginBottom: "20px",
           }}
         >
-          More admin tools coming soon…
-        </p>
+          return to homepage
+        </button>
+
+        {/* SCRIPT FOOTER LOGO */}
+        <h2
+          style={{
+            fontFamily: "Zeyada, cursive",
+            fontSize: "40px",
+            color: "#818263",
+            marginBottom: "20px",
+          }}
+        >
+          greekgive
+        </h2>
 
         {/* LOGOUT */}
-        <div style={{ marginTop: "40px" }}>
-          <button
-            onClick={() => {
-              localStorage.removeItem("greekgive_admin");
-              window.location.href = "/";
-            }}
-            style={{
-              background: "transparent",
-              border: "none",
-              color: "#818263",
-              fontSize: "14px",
-              textDecoration: "underline",
-              cursor: "pointer",
-              opacity: 0.7,
-            }}
-          >
-            logout
-          </button>
-        </div>
+        <button
+          onClick={() => {
+            localStorage.removeItem("greekgive_admin");
+            window.location.href = "/";
+          }}
+          style={{
+            background: "transparent",
+            border: "none",
+            color: "#818263",
+            fontSize: "14px",
+            textDecoration: "underline",
+            cursor: "pointer",
+            opacity: 0.7,
+          }}
+        >
+          logout
+        </button>
       </div>
     </div>
   );
