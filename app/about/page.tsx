@@ -5,7 +5,7 @@ export default function AboutPage() {
     <div
       style={{
         minHeight: "100vh",
-        backgroundColor: "#EFD7CF",
+        backgroundColor: "#EFD7CF", // Peach Protein
         display: "flex",
         justifyContent: "center",
         alignItems: "flex-start",
@@ -15,7 +15,7 @@ export default function AboutPage() {
     >
       <div
         style={{
-          backgroundColor: "#F7EFE7",
+          backgroundColor: "#F7EFE7", // Light Oat Latte
           borderRadius: "22px",
           padding: "50px 30px 70px 30px",
           width: "100%",
@@ -24,6 +24,7 @@ export default function AboutPage() {
           textAlign: "center",
         }}
       >
+        {/* HEADER */}
         <h1
           style={{
             fontFamily: "Zeyada, cursive",
@@ -39,7 +40,7 @@ export default function AboutPage() {
           style={{
             fontSize: "22px",
             color: "#818263",
-            marginBottom: "16px",
+            marginBottom: "20px",
           }}
         >
           Fundraising, made simple.
@@ -49,7 +50,9 @@ export default function AboutPage() {
         <div
           style={{
             display: "flex",
-            marginBottom: "28px",
+            justifyContent: "center",
+            margin: "0 auto 28px auto",
+            width: "70%",
             borderRadius: "14px",
             overflow: "hidden",
             border: "2px solid #818263",
@@ -60,8 +63,8 @@ export default function AboutPage() {
             onClick={() => (window.location.href = "/")}
             style={{
               flex: 1,
-              padding: "10px 0",
-              background: "#C2C395",
+              padding: "8px 0",
+              background: "#C2C395", // Avocado (inactive)
               color: "#4A4A3F",
               fontSize: "15px",
               fontWeight: 600,
@@ -72,6 +75,7 @@ export default function AboutPage() {
             Donate
           </button>
 
+          {/* Divider */}
           <div
             style={{
               width: "2px",
@@ -79,12 +83,12 @@ export default function AboutPage() {
             }}
           />
 
-          {/* About (Active) */}
+          {/* About (active) */}
           <button
             style={{
               flex: 1,
-              padding: "10px 0",
-              background: "#818263",
+              padding: "8px 0",
+              background: "#818263", // Sage (active)
               color: "white",
               fontSize: "15px",
               fontWeight: 600,
@@ -96,7 +100,7 @@ export default function AboutPage() {
           </button>
         </div>
 
-        {/* ABOUT PAGE CONTENT */}
+        {/* ABOUT CONTENT */}
         <section style={{ textAlign: "left" }}>
           <h2 style={{ color: "#818263", fontSize: "20px", fontWeight: 600 }}>
             Who We Are
@@ -126,7 +130,14 @@ export default function AboutPage() {
             to offer:
           </p>
 
-          <ul style={{ color: "#4A4A3F", fontSize: "17px", paddingLeft: "20px" }}>
+          <ul
+            style={{
+              color: "#4A4A3F",
+              fontSize: "17px",
+              paddingLeft: "20px",
+              marginBottom: "20px",
+            }}
+          >
             <li>A secure and trustworthy giving experience</li>
             <li>Clear, intuitive tools that support purposeful fundraising</li>
             <li>A platform that reflects the warmth of Greek sisterhood</li>
@@ -139,7 +150,13 @@ export default function AboutPage() {
           <h2 style={{ color: "#818263", fontSize: "20px", fontWeight: 600 }}>
             What We Offer
           </h2>
-          <ul style={{ color: "#4A4A3F", fontSize: "17px", paddingLeft: "20px" }}>
+          <ul
+            style={{
+              color: "#4A4A3F",
+              fontSize: "17px",
+              paddingLeft: "20px",
+            }}
+          >
             <li>Simple, elegant donation tools</li>
             <li>Quick preset giving options</li>
             <li>Easy sharing across platforms</li>
