@@ -1,143 +1,153 @@
+"use client";
+
 export default function AboutPage() {
   return (
-    <main
+    <div
       style={{
-        maxWidth: "700px",
-        margin: "0 auto",
-        padding: "32px 20px",
+        minHeight: "100vh",
+        backgroundColor: "#EFD7CF",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "flex-start",
+        padding: "40px 20px",
         fontFamily: "Arapey, serif",
-        color: "#2F4F2F",
       }}
     >
-      {/* Header */}
-      <h1
+      <div
         style={{
-          fontFamily: "Zeyada, cursive",
-          fontSize: "52px",
+          backgroundColor: "#F7EFE7",
+          borderRadius: "22px",
+          padding: "50px 30px 70px 30px",
+          width: "100%",
+          maxWidth: "520px",
+          boxShadow: "0 4px 10px rgba(0,0,0,0.08)",
           textAlign: "center",
-          marginBottom: "10px",
-          color: "#818263", // Savory Sage
         }}
       >
-        greekgive
-      </h1>
-
-      <p
-        style={{
-          textAlign: "center",
-          fontSize: "22px",
-          marginBottom: "40px",
-          color: "#818263",
-        }}
-      >
-        Fundraising, Made Simple.
-      </p>
-
-      {/* Section */}
-      <section style={{ marginBottom: "32px" }}>
-        <h2
+        <h1
           style={{
-            fontSize: "26px",
-            marginBottom: "12px",
+            fontFamily: "Zeyada, cursive",
+            fontSize: "58px",
             color: "#818263",
+            marginBottom: "4px",
           }}
         >
-          About GreekGive
-        </h2>
-        <p style={{ fontSize: "18px", lineHeight: 1.6 }}>
-          GreekGive was created with one purpose in mind — to make fundraising
-          easier, clearer, and more empowering for sorority and fraternity
-          communities. Chapters pour their hearts into philanthropy, service, and
-          sisterhood, and your fundraising tools should support that work, not
-          complicate it.
-          <br />
-          <br />
-          GreekGive offers a simple, beautifully designed way to collect
-          donations, share your chapter’s mission, and celebrate the impact
-          you’re making.
+          greekgive
+        </h1>
+
+        <p
+          style={{
+            fontSize: "22px",
+            color: "#818263",
+            marginBottom: "16px",
+          }}
+        >
+          Fundraising, made simple.
         </p>
-      </section>
 
-      {/* Mission */}
-      <section style={{ marginBottom: "32px" }}>
-        <h2
+        {/* DONATE / ABOUT TOGGLE */}
+        <div
           style={{
-            fontSize: "26px",
-            marginBottom: "12px",
-            color: "#818263",
+            display: "flex",
+            marginBottom: "28px",
+            borderRadius: "14px",
+            overflow: "hidden",
+            border: "2px solid #818263",
           }}
         >
-          Our Mission
-        </h2>
-        <p style={{ fontSize: "18px", lineHeight: 1.6 }}>
-          To support Greek organizations by providing a modern, intuitive, and
-          trustworthy fundraising experience that helps chapters raise more
-          money, reach more donors, and focus on what truly matters — service,
-          sisterhood, and strengthening their communities.
-        </p>
-      </section>
+          {/* Donate */}
+          <button
+            onClick={() => (window.location.href = "/")}
+            style={{
+              flex: 1,
+              padding: "10px 0",
+              background: "#C2C395",
+              color: "#4A4A3F",
+              fontSize: "15px",
+              fontWeight: 600,
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            Donate
+          </button>
 
-      {/* Why GG Matters */}
-      <section style={{ marginBottom: "32px" }}>
-        <h2
-          style={{
-            fontSize: "26px",
-            marginBottom: "12px",
-            color: "#818263",
-          }}
-        >
-          Why GreekGive Matters
-        </h2>
-        <p style={{ fontSize: "18px", lineHeight: 1.6 }}>
-          Chapters work hard. Fundraising shouldn’t be the hard part.
-          <br />
-          <br />
-          GreekGive was built because parents and alumnae want a safe,
-          transparent way to give; chapters need a platform that is easy to
-          share and looks professional; and officers deserve tools that simplify
-          tracking and reporting. No student should have to rely on outdated or
-          confusing systems.
-        </p>
-      </section>
+          <div
+            style={{
+              width: "2px",
+              backgroundColor: "#818263",
+            }}
+          />
 
-      {/* What We Offer */}
-      <section style={{ marginBottom: "32px" }}>
-        <h2
-          style={{
-            fontSize: "26px",
-            marginBottom: "12px",
-            color: "#818263",
-          }}
-        >
-          What We Offer
-        </h2>
-        <ul style={{ fontSize: "18px", lineHeight: 1.7 }}>
-          <li>Simple donation tools anyone can use</li>
-          <li>Preset giving amounts to speed up giving</li>
-          <li>Shareable links for Instagram, Facebook, and text</li>
-          <li>Automatic data exporting (admin-only access)</li>
-          <li>Mobile‑friendly pages for easy giving</li>
-          <li>Sorority‑inspired design your chapter will love to share</li>
-        </ul>
-      </section>
+          {/* About (Active) */}
+          <button
+            style={{
+              flex: 1,
+              padding: "10px 0",
+              background: "#818263",
+              color: "white",
+              fontSize: "15px",
+              fontWeight: 600,
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            About
+          </button>
+        </div>
 
-      {/* Closing */}
-      <section>
-        <h2
-          style={{
-            fontSize: "26px",
-            marginBottom: "12px",
-            color: "#818263",
-          }}
-        >
-          Built for Chapters. Inspired by Service.
-        </h2>
-        <p style={{ fontSize: "18px", lineHeight: 1.6 }}>
-          No matter your philanthropy, no matter the size of your chapter —
-          GreekGive is here to help you make a meaningful impact with ease,
-          heart, and a touch of sorority charm.
-        </p>
-      </section>
-    </main>
+        {/* ABOUT PAGE CONTENT */}
+        <section style={{ textAlign: "left" }}>
+          <h2 style={{ color: "#818263", fontSize: "20px", fontWeight: 600 }}>
+            Who We Are
+          </h2>
+          <p style={{ marginBottom: "20px", color: "#4A4A3F", fontSize: "17px" }}>
+            GreekGive was created with the belief that fundraising should reflect
+            the same intention and heart found in Greek life. Our platform
+            supports chapters in their efforts to uplift others through service
+            and philanthropy.
+          </p>
+
+          <h2 style={{ color: "#818263", fontSize: "20px", fontWeight: 600 }}>
+            Our Mission
+          </h2>
+          <p style={{ marginBottom: "20px", color: "#4A4A3F", fontSize: "17px" }}>
+            Our mission is to make giving easier, clearer, and more beautiful.
+            GreekGive helps chapters honor their values of service, philanthropy,
+            and community impact through a modern and intuitive experience.
+          </p>
+
+          <h2 style={{ color: "#818263", fontSize: "20px", fontWeight: 600 }}>
+            Why We Exist
+          </h2>
+          <p style={{ marginBottom: "20px", color: "#4A4A3F", fontSize: "17px" }}>
+            Philanthropy is at the heart of Greek life, yet fundraising tools can
+            be difficult to navigate or lack transparency. GreekGive was created
+            to offer:
+          </p>
+
+          <ul style={{ color: "#4A4A3F", fontSize: "17px", paddingLeft: "20px" }}>
+            <li>A secure and trustworthy giving experience</li>
+            <li>Clear, intuitive tools that support purposeful fundraising</li>
+            <li>A platform that reflects the warmth of Greek sisterhood</li>
+            <li>
+              Support for chapters committed to service, philanthropy, and
+              meaningful community impact
+            </li>
+          </ul>
+
+          <h2 style={{ color: "#818263", fontSize: "20px", fontWeight: 600 }}>
+            What We Offer
+          </h2>
+          <ul style={{ color: "#4A4A3F", fontSize: "17px", paddingLeft: "20px" }}>
+            <li>Simple, elegant donation tools</li>
+            <li>Quick preset giving options</li>
+            <li>Easy sharing across platforms</li>
+            <li>Secure admin-only reporting</li>
+            <li>A warm, sorority-inspired design for every chapter</li>
+          </ul>
+        </section>
+      </div>
+    </div>
   );
 }
