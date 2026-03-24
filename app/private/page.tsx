@@ -1,91 +1,108 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 
 export default function AdminLogin() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const router = useRouter();
+
+  const correctPassword = "dovelove1874";
 
   const handleLogin = () => {
-    if (password === "dovelove1874") {
+    if (password === correctPassword) {
       localStorage.setItem("greekgive_admin", "true");
-      router.push("/private");
+      window.location.href = "/private";
     } else {
       setError("Incorrect password. Please try again.");
     }
   };
 
   return (
-    <main
+    <div
       style={{
         minHeight: "100vh",
-        background: "#EFD7CF", // Peach Protein
+        backgroundColor: "#EFD7CF", // Peach Protein
         display: "flex",
-        alignItems: "center",
         justifyContent: "center",
-        padding: "20px",
+        alignItems: "flex-start",
+        padding: "40px 20px",
         fontFamily: "Arapey, serif",
       }}
     >
       <div
         style={{
-          background: "#DCD4C1", // Oat Latte
-          padding: "32px",
-          borderRadius: "14px",
-          maxWidth: "400px",
+          backgroundColor: "#F7EFE7", // Light Oat Latte
+          borderRadius: "22px",
+          padding: "50px 30px 70px 30px",
           width: "100%",
-          boxShadow: "0 4px 8px rgba(0,0,0,0.08)",
+          maxWidth: "520px",
+          boxShadow: "0 4px 10px rgba(0,0,0,0.08)",
+          textAlign: "center",
         }}
       >
         {/* HEADER */}
         <h1
           style={{
             fontFamily: "Zeyada, cursive",
-            fontSize: "46px",
-            textAlign: "center",
-            marginBottom: "6px",
-            color: "#818263", // Savory Sage
+            fontSize: "58px",
+            color: "#818263",
+            marginBottom: "4px",
           }}
         >
           greekgive
         </h1>
 
-        <h2
+        <p
           style={{
-            textAlign: "center",
-            fontSize: "20px",
+            fontSize: "22px",
             color: "#818263",
-            marginBottom: "24px",
+            marginBottom: "26px",
           }}
         >
-          greekgive admin access
-        </h2>
+          Admin Access
+        </p>
+
+        {/* PASSWORD LABEL */}
+        <label
+          style={{
+            fontWeight: 600,
+            color: "#818263",
+            fontSize: "17px",
+            display: "block",
+            textAlign: "left",
+            marginBottom: "6px",
+          }}
+        >
+          Password
+        </label>
 
         {/* PASSWORD INPUT */}
-        <label style={{ fontWeight: 600, color: "#818263" }}>
-          Enter Password
-        </label>
         <input
           type="password"
+          placeholder="Enter Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
           style={{
             width: "100%",
-            padding: "12px",
-            borderRadius: "8px",
+            padding: "14px",
+            borderRadius: "12px",
             border: "1px solid #b8b4a6",
-            marginTop: "6px",
-            marginBottom: "16px",
-            fontSize: "16px",
+            fontSize: "17px",
+            marginBottom: "18px",
           }}
         />
 
         {/* ERROR MESSAGE */}
         {error && (
-          <p style={{ color: "#a94442", marginBottom: "12px" }}>{error}</p>
+          <p
+            style={{
+              color: "#a94442",
+              fontSize: "16px",
+              marginBottom: "14px",
+            }}
+          >
+            {error}
+          </p>
         )}
 
         {/* LOGIN BUTTON */}
@@ -94,17 +111,35 @@ export default function AdminLogin() {
           style={{
             width: "100%",
             background: "#818263", // Savory Sage
+            padding: "14px",
+            borderRadius: "14px",
+            fontSize: "19px",
+            fontWeight: 600,
             border: "none",
-            borderRadius: "8px",
-            padding: "12px",
-            fontSize: "18px",
             color: "white",
             cursor: "pointer",
+            marginBottom: "26px",
           }}
         >
           Login
         </button>
+
+        {/* BACK LINK */}
+        <button
+          onClick={() => (window.location.href = "/")}
+          style={{
+            background: "transparent",
+            border: "none",
+            color: "#818263",
+            fontSize: "14px",
+            textDecoration: "underline",
+            cursor: "pointer",
+            opacity: 0.7,
+          }}
+        >
+          return to site
+        </button>
       </div>
-    </main>
+    </div>
   );
 }
