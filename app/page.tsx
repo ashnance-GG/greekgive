@@ -1,85 +1,9 @@
 "use client";
 
- {import { useState } from "react";
-                navigator.clipboard.writeText(window.location.href);
-                window.open("https://www.instagram.com/", "_blank");
-              }}
-              style={{
-                background: "#DDBAAE", // Berry
-                border: "2px solid #818263",
-                color: "white",
-                padding: "12px 20px",
-                borderRadius: "10px",
-                cursor: "pointer",
-                fontSize: "16px",
-              }}
-            >
-              Instagram
-            </button>
-
-            {/* Facebook */}
-            <button
-              onClick={() => {
-                const url = encodeURIComponent(window.location.href);
-                window.open(
-                  `https://www.facebook.com/sharer/sharer.php?u=${url}`,
-                  "_blank"
-                );
-              }}
-              style={{
-                background: "#DDBAAE",
-                border: "2px solid #818263",
-                color: "white",
-                padding: "12px 20px",
-                borderRadius: "10px",
-                cursor: "pointer",
-                fontSize: "16px",
-              }}
-            >
-              Facebook
-            </button>
-
-            {/* Copy Link */}
-            <button
-              onClick={() => navigator.clipboard.writeText(window.location.href)}
-              style={{
-                background: "#DDBAAE",
-                border: "2px solid #818263",
-                color: "white",
-                padding: "12px 20px",
-                borderRadius: "10px",
-                cursor: "pointer",
-                fontSize: "16px",
-              }}
-            >
-              Copy Link
-            </button>
-          </div>
-        </div>
-
-        {/* ADMIN LOGIN LINK */}
-        <div style={{ marginTop: "40px", textAlign: "center" }}>
-          <button
-            onClick={() => (window.location.href = "/private/login")}
-            style={{
-              background: "transparent",
-              border: "none",
-              color: "#818263",
-              fontSize: "14px",
-              textDecoration: "underline",
-              cursor: "pointer",
-              opacity: 0.7,
-            }}
-          >
-            admin login
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
+import { useState } from "react";
 
 export default function Home() {
+  const [activeTab, setActiveTab] = useState("donate");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [chapter, setChapter] = useState("");
@@ -102,10 +26,9 @@ export default function Home() {
         fontFamily: "Arapey, serif",
       }}
     >
-      {/* MAIN ROUNDED PANEL */}
       <div
         style={{
-          backgroundColor: "#F7EFE7", // Lighter Oat Latte
+          backgroundColor: "#F7EFE7", // Light Oat Latte
           borderRadius: "22px",
           padding: "50px 30px 70px 30px",
           width: "100%",
@@ -130,218 +53,343 @@ export default function Home() {
           style={{
             fontSize: "22px",
             color: "#818263",
-            marginBottom: "28px", // reduced spacing
+            marginBottom: "24px", // smaller gap
           }}
         >
           Fundraising, made simple.
         </p>
 
-        {/* NAME */}
-        <label
-          style={{
-            fontWeight: 600,
-            color: "#818263",
-            fontSize: "18px",
-            display: "block",
-            textAlign: "left",
-            marginBottom: "6px",
-          }}
-        >
-          Name
-        </label>
-        <input
-          type="text"
-          placeholder="Your Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "14px",
-            borderRadius: "12px",
-            border: "1px solid #b8b4a6",
-            fontSize: "18px",
-            marginBottom: "20px",
-          }}
-        />
-
-        {/* EMAIL */}
-        <label
-          style={{
-            fontWeight: 600,
-            color: "#818263",
-            fontSize: "18px",
-            display: "block",
-            textAlign: "left",
-            marginBottom: "6px",
-          }}
-        >
-          Email
-        </label>
-        <input
-          type="email"
-          placeholder="Your Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "14px",
-            borderRadius: "12px",
-            border: "1px solid #b8b4a6",
-            fontSize: "18px",
-            marginBottom: "20px",
-          }}
-        />
-
-        {/* CHAPTER NAME (optional) — moved above Donation Amount */}
-        <label
-          style={{
-            fontWeight: 600,
-            color: "#818263",
-            fontSize: "18px",
-            display: "block",
-            textAlign: "left",
-            marginBottom: "6px",
-          }}
-        >
-          Chapter Name (Optional)
-        </label>
-        <input
-          type="text"
-          placeholder="e.g., Beta Zeta"
-          value={chapter}
-          onChange={(e) => setChapter(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "14px",
-            borderRadius: "12px",
-            border: "1px solid #b8b4a6",
-            fontSize: "18px",
-            marginBottom: "20px",
-          }}
-        />
-
-        {/* DONATION AMOUNT */}
-        <label
-          style={{
-            fontWeight: 600,
-            color: "#818263",
-            fontSize: "18px",
-            display: "block",
-            textAlign: "left",
-            marginBottom: "6px",
-          }}
-        >
-          Donation Amount
-        </label>
-        <input
-          type="number"
-          placeholder="$0.00"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "14px",
-            borderRadius: "12px",
-            border: "1px solid #b8b4a6",
-            fontSize: "18px",
-            marginBottom: "20px",
-          }}
-        />
-
-        {/* PRESET BUTTONS */}
+        {/* DONATE / ABOUT TOGGLE */}
         <div
           style={{
+            background: "#F7EFE7",
+            padding: "6px",
             display: "flex",
-            gap: "12px",
-            marginBottom: "24px",
+            borderRadius: "12px",
+            marginBottom: "28px",
           }}
         >
-          {[5, 10, 25].map((val) => (
-            <button
-              key={val}
-              onClick={() => setAmount(String(val))}
-              style={{
-                flex: 1,
-                background: "#818263",
-                borderRadius: "10px",
-                padding: "12px 0",
-                color: "white",
-                fontSize: "17px",
-                border: "none",
-                cursor: "pointer",
-              }}
-            >
-              ${val}
-            </button>
-          ))}
+          <button
+            onClick={() => setActiveTab("donate")}
+            style={{
+              flex: 1,
+              padding: "10px",
+              borderRadius: "10px",
+              border: "none",
+              cursor: "pointer",
+              background: activeTab === "donate" ? "#818263" : "transparent",
+              color: activeTab === "donate" ? "white" : "#818263",
+              fontSize: "16px",
+              fontWeight: 600,
+            }}
+          >
+            Donate
+          </button>
+
+          <button
+            onClick={() => (window.location.href = "/about")}
+            style={{
+              flex: 1,
+              padding: "10px",
+              borderRadius: "10px",
+              border: "none",
+              cursor: "pointer",
+              background: activeTab === "about" ? "#818263" : "transparent",
+              color: activeTab === "about" ? "white" : "#818263",
+              fontSize: "16px",
+              fontWeight: 600,
+            }}
+          >
+            About
+          </button>
         </div>
 
-        {/* CONTINUE BUTTON */}
-        <button
-          onClick={handleContinue}
-          style={{
-            width: "100%",
-            background: "#C2C395",
-            padding: "16px",
-            borderRadius: "14px",
-            fontSize: "20px",
-            fontWeight: 600,
-            border: "none",
-            color: "#4A4A3F",
-            cursor: "pointer",
-            marginBottom: "30px",
-          }}
-        >
-          Continue to Payment
-        </button>
+        {/* DONATE TAB CONTENT */}
+        {activeTab === "donate" && (
+          <>
 
-        {/* THANK YOU */}
-        {showThankYou && (
-          <div
-            style={{
-              background: "#e9f5e3",
-              borderRadius: "14px",
-              padding: "18px",
-              border: "1px solid #b5d6a3",
-              marginBottom: "32px",
-            }}
-          >
-            <p style={{ fontSize: "19px", fontWeight: 600, color: "#4A4A3F" }}>
-              Thank you so much for supporting our chapter! 💜
-            </p>
-          </div>
+            {/* NAME */}
+            <label
+              style={{
+                fontWeight: 600,
+                color: "#818263",
+                fontSize: "18px",
+                display: "block",
+                textAlign: "left",
+                marginBottom: "6px",
+              }}
+            >
+              Name
+            </label>
+            <input
+              type="text"
+              placeholder="Your Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              style={{
+                width: "100%",
+                padding: "14px",
+                borderRadius: "12px",
+                border: "1px solid #b8b4a6",
+                fontSize: "18px",
+                marginBottom: "20px",
+              }}
+            />
+
+            {/* EMAIL */}
+            <label
+              style={{
+                fontWeight: 600,
+                color: "#818263",
+                fontSize: "18px",
+                display: "block",
+                textAlign: "left",
+                marginBottom: "6px",
+              }}
+            >
+              Email
+            </label>
+            <input
+              type="email"
+              placeholder="Your Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              style={{
+                width: "100%",
+                padding: "14px",
+                borderRadius: "12px",
+                border: "1px solid #b8b4a6",
+                fontSize: "18px",
+                marginBottom: "20px",
+              }}
+            />
+
+            {/* CHAPTER NAME (Optional) */}
+            <label
+              style={{
+                fontWeight: 600,
+                color: "#818263",
+                fontSize: "18px",
+                display: "block",
+                textAlign: "left",
+                marginBottom: "6px",
+              }}
+            >
+              Chapter Name (Optional)
+            </label>
+            <input
+              type="text"
+              placeholder="e.g., Beta Zeta"
+              value={chapter}
+              onChange={(e) => setChapter(e.target.value)}
+              style={{
+                width: "100%",
+                padding: "14px",
+                borderRadius: "12px",
+                border: "1px solid #b8b4a6",
+                fontSize: "18px",
+                marginBottom: "20px",
+              }}
+            />
+
+            {/* DONATION AMOUNT */}
+            <label
+              style={{
+                fontWeight: 600,
+                color: "#818263",
+                fontSize: "18px",
+                display: "block",
+                textAlign: "left",
+                marginBottom: "6px",
+              }}
+            >
+              Donation Amount
+            </label>
+            <input
+              type="number"
+              placeholder="$0.00"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              style={{
+                width: "100%",
+                padding: "14px",
+                borderRadius: "12px",
+                border: "1px solid #b8b4a6",
+                fontSize: "18px",
+                marginBottom: "20px",
+              }}
+            />
+
+            {/* PRESET BUTTONS */}
+            <div
+              style={{
+                display: "flex",
+                gap: "12px",
+                marginBottom: "24px",
+              }}
+            >
+              {[5, 10, 25].map((val) => (
+                <button
+                  key={val}
+                  onClick={() => setAmount(String(val))}
+                  style={{
+                    flex: 1,
+                    background: "#818263",
+                    borderRadius: "10px",
+                    padding: "12px 0",
+                    color: "white",
+                    fontSize: "17px",
+                    border: "none",
+                    cursor: "pointer",
+                  }}
+                >
+                  ${val}
+                </button>
+              ))}
+            </div>
+
+            {/* CONTINUE BUTTON */}
+            <button
+              onClick={handleContinue}
+              style={{
+                width: "100%",
+                background: "#C2C395",
+                padding: "16px",
+                borderRadius: "14px",
+                fontSize: "20px",
+                fontWeight: 600,
+                border: "none",
+                color: "#4A4A3F",
+                cursor: "pointer",
+                marginBottom: "30px",
+              }}
+            >
+              Continue to Payment
+            </button>
+
+            {/* THANK YOU */}
+            {showThankYou && (
+              <div
+                style={{
+                  background: "#e9f5e3",
+                  borderRadius: "14px",
+                  padding: "18px",
+                  border: "1px solid #b5d6a3",
+                  marginBottom: "32px",
+                }}
+              >
+                <p style={{ fontSize: "19px", fontWeight: 600, color: "#4A4A3F" }}>
+                  Thank you so much for supporting our chapter! 💜
+                </p>
+              </div>
+            )}
+
+            {/* SHARE BLOCK */}
+            <div
+              style={{
+                backgroundColor: "#F7EFE7",
+                padding: "20px",
+                borderRadius: "14px",
+                marginTop: "10px",
+                border: "1px solid #e2dacb",
+              }}
+            >
+              <p
+                style={{
+                  color: "#818263",
+                  fontSize: "18px",
+                  fontWeight: 600,
+                  marginBottom: "14px",
+                }}
+              >
+                Share this fundraiser
+              </p>
+
+              {/* BERRY BUTTONS WITH SAGE BORDERS */}
+              <div
+                style={{
+                  display: "flex",
+                  gap: "12px",
+                  justifyContent: "center",
+                  flexWrap: "wrap",
+                }}
+              >
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText(window.location.href);
+                    window.open("https://www.instagram.com/", "_blank");
+                  }}
+                  style={{
+                    background: "#DDBAAE",
+                    border: "2px solid #818263",
+                    color: "white",
+                    padding: "12px 20px",
+                    borderRadius: "10px",
+                    cursor: "pointer",
+                    fontSize: "16px",
+                  }}
+                >
+                  Instagram
+                </button>
+
+                <button
+                  onClick={() => {
+                    const url = encodeURIComponent(window.location.href);
+                    window.open(
+                      `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+                      "_blank"
+                    );
+                  }}
+                  style={{
+                    background: "#DDBAAE",
+                    border: "2px solid #818263",
+                    color: "white",
+                    padding: "12px 20px",
+                    borderRadius: "10px",
+                    cursor: "pointer",
+                    fontSize: "16px",
+                  }}
+                >
+                  Facebook
+                </button>
+
+                <button
+                  onClick={() => navigator.clipboard.writeText(window.location.href)}
+                  style={{
+                    background: "#DDBAAE",
+                    border: "2px solid #818263",
+                    color: "white",
+                    padding: "12px 20px",
+                    borderRadius: "10px",
+                    cursor: "pointer",
+                    fontSize: "16px",
+                  }}
+                >
+                  Copy Link
+                </button>
+              </div>
+            </div>
+          </>
         )}
 
-        {/* SHARE BLOCK */}
-        <div
-          style={{
-            backgroundColor: "#F7EFE7",
-            padding: "20px",
-            borderRadius: "14px",
-            marginTop: "10px",
-            border: "1px solid #e2dacb",
-          }}
-        >
-          {/* HEADING matches your screenshot */}
-          <p
+        {/* ADMIN LOGIN LINK */}
+        <div style={{ marginTop: "40px", textAlign: "center" }}>
+          <button
+            onClick={() => (window.location.href = "/private/login")}
             style={{
+              background: "transparent",
+              border: "none",
               color: "#818263",
-              fontSize: "18px",
-              fontWeight: 600,
-              marginBottom: "14px",
+              fontSize: "14px",
+              textDecoration: "underline",
+              cursor: "pointer",
+              opacity: 0.7,
             }}
           >
-            Share this fundraiser
-          </p>
-
-          {/* SHARE BUTTONS — BERRY with SAGE BORDERS */}
-          <div
-            style={{
-              display: "flex",
-              gap: "12px",
-              justifyContent: "center",
-              flexWrap: "wrap",
-            }}
-          >
-            {/* Instagram */}
-            <button
+            admin login
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
