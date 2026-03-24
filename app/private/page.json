@@ -1,0 +1,162 @@
+"use client";
+
+import { useEffect } from "react";
+
+export default function AdminDashboard() {
+  useEffect(() => {
+    const loggedIn = localStorage.getItem("greekgive_admin");
+    if (!loggedIn) {
+      window.location.href = "/private/login";
+    }
+  }, []);
+
+  const handleExport = () => {
+    // Placeholder CSV logic — not connected to donations yet
+    const csvContent =
+      "data:text/csv;charset=utf-8,Name,Email,Amount,Chapter\n";
+    const link = document.createElement("a");
+    link.href = encodeURI(csvContent);
+    link.download = "greekgive-donations.csv";
+    link.click();
+  };
+
+  return (
+    <div
+      style={{
+        minHeight: "100vh",
+        backgroundColor: "#EFD7CF", // Peach Protein
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "flex-start",
+        padding: "40px 20px",
+        fontFamily: "Arapey, serif",
+      }}
+    >
+      <div
+        style={{
+          backgroundColor: "#F7EFE7", // Light Oat Latte
+          borderRadius: "22px",
+          padding: "50px 30px 70px 30px",
+          width: "100%",
+          maxWidth: "520px",
+          boxShadow: "0 4px 10px rgba(0,0,0,0.08)",
+          textAlign: "center",
+        }}
+      >
+        {/* HEADER */}
+        <h1
+          style={{
+            fontFamily: "Zeyada, cursive",
+            fontSize: "54px",
+            color: "#818263",
+            marginBottom: "6px",
+          }}
+        >
+          greekgive
+        </h1>
+
+        <p
+          style={{
+            fontSize: "22px",
+            color: "#818263",
+            marginBottom: "32px",
+          }}
+        >
+          Admin Dashboard
+        </p>
+
+        {/* EXPORT SECTION */}
+        <h2
+          style={{
+            color: "#818263",
+            fontSize: "20px",
+            fontWeight: 600,
+            marginBottom: "10px",
+          }}
+        >
+          Donation Data Tools
+        </h2>
+
+        <button
+          onClick={handleExport}
+          style={{
+            width: "100%",
+            background: "#818263", // Savory Sage
+            padding: "14px",
+            borderRadius: "14px",
+            fontSize: "18px",
+            fontWeight: 600,
+            border: "none",
+            color: "white",
+            cursor: "pointer",
+            marginBottom: "30px",
+          }}
+        >
+          Export to Excel
+        </button>
+
+        {/* QR LINK SECTION */}
+        <h2
+          style={{
+            color: "#818263",
+            fontSize: "20px",
+            fontWeight: 600,
+            marginBottom: "10px",
+          }}
+        >
+          QR Code
+        </h2>
+
+        <button
+          onClick={() => (window.location.href = "/qr")}
+          style={{
+            width: "100%",
+            background: "#C2C395", // Avocado Smoothie
+            padding: "12px",
+            borderRadius: "12px",
+            fontSize: "17px",
+            fontWeight: 600,
+            border: "2px solid #818263",
+            color: "#4A4A3F",
+            cursor: "pointer",
+            marginBottom: "34px",
+          }}
+        >
+          Open QR Page
+        </button>
+
+        {/* FUTURE TOOLS PLACEHOLDER */}
+        <p
+          style={{
+            color: "#4A4A3F",
+            fontSize: "15px",
+            opacity: 0.8,
+          }}
+        >
+          More admin tools coming soon…
+        </p>
+
+        {/* LOGOUT */}
+        <div style={{ marginTop: "40px" }}>
+          <button
+            onClick={() => {
+              localStorage.removeItem("greekgive_admin");
+              window.location.href = "/";
+            }}
+            style={{
+              background: "transparent",
+              border: "none",
+              color: "#818263",
+              fontSize: "14px",
+              textDecoration: "underline",
+              cursor: "pointer",
+              opacity: 0.7,
+            }}
+          >
+            logout
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
