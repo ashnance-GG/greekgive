@@ -18,7 +18,7 @@ export default function Home() {
     <div
       style={{
         minHeight: "100vh",
-        backgroundColor: "#EFD7CF",
+        backgroundColor: "#EFD7CF", // Peach Protein
         display: "flex",
         justifyContent: "center",
         alignItems: "flex-start",
@@ -26,9 +26,10 @@ export default function Home() {
         fontFamily: "Arapey, serif",
       }}
     >
+      {/* MAIN CARD */}
       <div
         style={{
-          backgroundColor: "#F7EFE7",
+          backgroundColor: "#F7EFE7", // Light Oat Latte
           borderRadius: "22px",
           padding: "50px 30px 70px 30px",
           width: "100%",
@@ -43,7 +44,7 @@ export default function Home() {
             fontFamily: "Zeyada, cursive",
             fontSize: "58px",
             color: "#818263",
-            marginBottom: "4px", 
+            marginBottom: "4px", // tighter
           }}
         >
           greekgive
@@ -53,28 +54,30 @@ export default function Home() {
           style={{
             fontSize: "22px",
             color: "#818263",
-            marginBottom: "16px", 
+            marginBottom: "26px", // MORE space before toggles
           }}
         >
           Fundraising, made simple.
         </p>
 
-        {/* DONATE / ABOUT TOGGLE */}
+        {/* CONNECTED DONATE / ABOUT TABS (SHORTER, CENTERED) */}
         <div
           style={{
             display: "flex",
-            marginBottom: "26px",
+            justifyContent: "center",
+            margin: "0 auto 32px auto",
+            width: "70%", // SHORTER tabs
             borderRadius: "14px",
             overflow: "hidden",
             border: "2px solid #818263",
           }}
         >
-          {/* DONATE TAB */}
+          {/* Donate */}
           <button
             onClick={() => setActiveTab("donate")}
             style={{
               flex: 1,
-              padding: "10px 0",
+              padding: "8px 0",
               background: activeTab === "donate" ? "#818263" : "#C2C395",
               color: activeTab === "donate" ? "white" : "#4A4A3F",
               fontSize: "15px",
@@ -86,7 +89,7 @@ export default function Home() {
             Donate
           </button>
 
-          {/* DIVIDING LINE */}
+          {/* Divider */}
           <div
             style={{
               width: "2px",
@@ -94,12 +97,12 @@ export default function Home() {
             }}
           />
 
-          {/* ABOUT TAB */}
+          {/* About */}
           <button
             onClick={() => (window.location.href = "/about")}
             style={{
               flex: 1,
-              padding: "10px 0",
+              padding: "8px 0",
               background: activeTab === "about" ? "#818263" : "#C2C395",
               color: activeTab === "about" ? "white" : "#4A4A3F",
               fontSize: "15px",
@@ -112,7 +115,7 @@ export default function Home() {
           </button>
         </div>
 
-        {/* DONATE FORM */}
+        {/* DONATE FORM CONTENT */}
         {activeTab === "donate" && (
           <>
             {/* NAME */}
@@ -171,7 +174,7 @@ export default function Home() {
               }}
             />
 
-            {/* CHAPTER NAME */}
+            {/* CHAPTER */}
             <label
               style={{
                 fontWeight: 600,
@@ -227,7 +230,7 @@ export default function Home() {
               }}
             />
 
-            {/* PRESET BUTTONS */}
+            {/* PRESETS */}
             <div
               style={{
                 display: "flex",
@@ -326,14 +329,13 @@ export default function Home() {
                   flexWrap: "wrap",
                 }}
               >
-                {/* Instagram */}
                 <button
                   onClick={() => {
                     navigator.clipboard.writeText(window.location.href);
                     window.open("https://www.instagram.com/", "_blank");
                   }}
                   style={{
-                    background: "#DDBAAE",
+                    background: "#DDBAAE", // Berry
                     border: "2px solid #818263",
                     color: "white",
                     padding: "12px 20px",
@@ -345,7 +347,6 @@ export default function Home() {
                   Instagram
                 </button>
 
-                {/* Facebook */}
                 <button
                   onClick={() => {
                     const url = encodeURIComponent(window.location.href);
@@ -367,7 +368,6 @@ export default function Home() {
                   Facebook
                 </button>
 
-                {/* Copy Link */}
                 <button
                   onClick={() =>
                     navigator.clipboard.writeText(window.location.href)
@@ -389,8 +389,8 @@ export default function Home() {
           </>
         )}
 
-        {/* ADMIN LOGIN LINK */}
-        <div style={{ marginTop: "34px", textAlign: "center" }}>
+        {/* ADMIN LOGIN */}
+        <div style={{ marginTop: "36px", textAlign: "center" }}>
           <button
             onClick={() => (window.location.href = "/private/login")}
             style={{
