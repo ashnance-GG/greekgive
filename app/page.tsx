@@ -44,7 +44,7 @@ export default function Home() {
             fontFamily: "Zeyada, cursive",
             fontSize: "58px",
             color: "#818263",
-            marginBottom: "4px", // tighter
+            marginBottom: "4px", // tightened
           }}
         >
           greekgive
@@ -54,25 +54,25 @@ export default function Home() {
           style={{
             fontSize: "22px",
             color: "#818263",
-            marginBottom: "26px", // MORE space before toggles
+            marginBottom: "26px", // extra spacing below
           }}
         >
           Fundraising, made simple.
         </p>
 
-        {/* CONNECTED DONATE / ABOUT TABS (SHORTER, CENTERED) */}
+        {/* DONATE / ABOUT TABS (SMALLER + CENTERED) */}
         <div
           style={{
             display: "flex",
             justifyContent: "center",
             margin: "0 auto 32px auto",
-            width: "70%", // SHORTER tabs
+            width: "70%",
             borderRadius: "14px",
             overflow: "hidden",
             border: "2px solid #818263",
           }}
         >
-          {/* Donate */}
+          {/* DONATE */}
           <button
             onClick={() => setActiveTab("donate")}
             style={{
@@ -89,7 +89,7 @@ export default function Home() {
             Donate
           </button>
 
-          {/* Divider */}
+          {/* DIVIDER */}
           <div
             style={{
               width: "2px",
@@ -97,7 +97,7 @@ export default function Home() {
             }}
           />
 
-          {/* About */}
+          {/* ABOUT */}
           <button
             onClick={() => (window.location.href = "/about")}
             style={{
@@ -115,7 +115,7 @@ export default function Home() {
           </button>
         </div>
 
-        {/* DONATE FORM CONTENT */}
+        {/* DONATE TAB CONTENT */}
         {activeTab === "donate" && (
           <>
             {/* NAME */}
@@ -185,11 +185,11 @@ export default function Home() {
                 marginBottom: "6px",
               }}
             >
-              Sorority Name (Optional)
+              Chapter Name (Optional)
             </label>
             <input
               type="text"
-              placeholder="e.g., Sigma Kappa"
+              placeholder="e.g., Beta Zeta"
               value={chapter}
               onChange={(e) => setChapter(e.target.value)}
               style={{
@@ -202,7 +202,7 @@ export default function Home() {
               }}
             />
 
-            {/* DONATION AMOUNT */}
+            {/* AMOUNT */}
             <label
               style={{
                 fontWeight: 600,
@@ -271,13 +271,54 @@ export default function Home() {
                 border: "none",
                 color: "#4A4A3F",
                 cursor: "pointer",
-                marginBottom: "26px",
+                marginBottom: "24px",
               }}
             >
               Continue to Payment
             </button>
 
-            {/* THANK YOU */}
+            {/* ✅ PAYMENT BADGES (APPLE PAY + CARDS ONLY) */}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                gap: "12px",
+                marginBottom: "32px",
+                flexWrap: "wrap",
+              }}
+            >
+              {/* APPLE PAY */}
+              <div
+                style={{
+                  background: "#F7EFE7",
+                  border: "2px solid #818263",
+                  borderRadius: "10px",
+                  padding: "8px 14px",
+                  fontSize: "15px",
+                  color: "#4A4A3F",
+                  fontWeight: 600,
+                }}
+              >
+                 Apple Pay
+              </div>
+
+              {/* CARDS */}
+              <div
+                style={{
+                  background: "#F7EFE7",
+                  border: "2px solid #818263",
+                  borderRadius: "10px",
+                  padding: "8px 14px",
+                  fontSize: "15px",
+                  color: "#4A4A3F",
+                  fontWeight: 600,
+                }}
+              >
+                💳 Cards
+              </div>
+            </div>
+
+            {/* THANK YOU BOX */}
             {showThankYou && (
               <div
                 style={{
@@ -369,9 +410,7 @@ export default function Home() {
                 </button>
 
                 <button
-                  onClick={() =>
-                    navigator.clipboard.writeText(window.location.href)
-                  }
+                  onClick={() => navigator.clipboard.writeText(window.location.href)}
                   style={{
                     background: "#DDBAAE",
                     border: "2px solid #818263",
