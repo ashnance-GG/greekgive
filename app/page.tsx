@@ -185,11 +185,11 @@ export default function Home() {
                 marginBottom: "6px",
               }}
             >
-              Chapter Name (Optional)
+              Sorority Name (Optional)
             </label>
             <input
               type="text"
-              placeholder="e.g., Beta Zeta"
+              placeholder="e.g., Sigma Kappa"
               value={chapter}
               onChange={(e) => setChapter(e.target.value)}
               style={{
