@@ -10,8 +10,23 @@ export default function Home() {
   const [amount, setAmount] = useState("");
   const [showThankYou, setShowThankYou] = useState(false);
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
     setShowThankYou(true);
+
+    // ✅ SAVE donation to backend
+    await fetch("/api/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name,
+        email,
+        amount,
+        chapter,
+        source: "Homepage",
+      }),
+    });
+
+    // Payment redirect (coming later)
   };
 
   return (
@@ -44,7 +59,7 @@ export default function Home() {
             fontFamily: "Zeyada, cursive",
             fontSize: "58px",
             color: "#818263",
-            marginBottom: "4px", // tightened
+            marginBottom: "4px", // tight spacing
           }}
         >
           greekgive
@@ -54,13 +69,13 @@ export default function Home() {
           style={{
             fontSize: "22px",
             color: "#818263",
-            marginBottom: "26px", // extra spacing below
+            marginBottom: "26px", // extra spacing now
           }}
         >
           Fundraising, made simple.
         </p>
 
-        {/* DONATE / ABOUT TABS (SMALLER + CENTERED) */}
+        {/* DONATE / ABOUT TABS (CENTERED, SHORTER) */}
         <div
           style={{
             display: "flex",
@@ -115,7 +130,7 @@ export default function Home() {
           </button>
         </div>
 
-        {/* DONATE TAB CONTENT */}
+        {/* DONATE FORM */}
         {activeTab === "donate" && (
           <>
             {/* NAME */}
@@ -185,11 +200,11 @@ export default function Home() {
                 marginBottom: "6px",
               }}
             >
-              Sorority Name (Optional)
+              Chapter Name (Optional)
             </label>
             <input
               type="text"
-              placeholder="e.g., Sigma Kappa"
+              placeholder="e.g., Beta Zeta"
               value={chapter}
               onChange={(e) => setChapter(e.target.value)}
               style={{
@@ -202,7 +217,7 @@ export default function Home() {
               }}
             />
 
-            {/* AMOUNT */}
+            {/* DONATION AMOUNT */}
             <label
               style={{
                 fontWeight: 600,
@@ -230,7 +245,7 @@ export default function Home() {
               }}
             />
 
-            {/* PRESETS */}
+            {/* PRESET AMOUNTS */}
             <div
               style={{
                 display: "flex",
@@ -271,13 +286,13 @@ export default function Home() {
                 border: "none",
                 color: "#4A4A3F",
                 cursor: "pointer",
-                marginBottom: "24px",
+                marginBottom: "26px",
               }}
             >
               Continue to Payment
             </button>
 
-            {/* ✅ PAYMENT BADGES (APPLE PAY + CARDS ONLY) */}
+            {/* ✅ APPLE PAY + CARDS BADGES */}
             <div
               style={{
                 display: "flex",
@@ -287,7 +302,6 @@ export default function Home() {
                 flexWrap: "wrap",
               }}
             >
-              {/* APPLE PAY */}
               <div
                 style={{
                   background: "#F7EFE7",
@@ -302,7 +316,6 @@ export default function Home() {
                  Apple Pay
               </div>
 
-              {/* CARDS */}
               <div
                 style={{
                   background: "#F7EFE7",
@@ -318,7 +331,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* THANK YOU BOX */}
+            {/* THANK YOU MESSAGE */}
             {showThankYou && (
               <div
                 style={{
@@ -370,13 +383,14 @@ export default function Home() {
                   flexWrap: "wrap",
                 }}
               >
+                {/* Instagram */}
                 <button
                   onClick={() => {
                     navigator.clipboard.writeText(window.location.href);
                     window.open("https://www.instagram.com/", "_blank");
                   }}
                   style={{
-                    background: "#DDBAAE", // Berry
+                    background: "#DDBAAE",
                     border: "2px solid #818263",
                     color: "white",
                     padding: "12px 20px",
@@ -388,6 +402,7 @@ export default function Home() {
                   Instagram
                 </button>
 
+                {/* Facebook */}
                 <button
                   onClick={() => {
                     const url = encodeURIComponent(window.location.href);
@@ -409,8 +424,11 @@ export default function Home() {
                   Facebook
                 </button>
 
+                {/* Copy Link */}
                 <button
-                  onClick={() => navigator.clipboard.writeText(window.location.href)}
+                  onClick={() =>
+                    navigator.clipboard.writeText(window.location.href)
+                  }
                   style={{
                     background: "#DDBAAE",
                     border: "2px solid #818263",
