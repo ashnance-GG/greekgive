@@ -11,6 +11,19 @@ export default function Home() {
   const [showThankYou, setShowThankYou] = useState(false);
 
   const handleContinue = async () => {
+  setShowThankYou(true);
+
+  await fetch("/api/submit", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name,
+      email,
+      amount,
+      chapter,
+    }),
+  });
+};
     setShowThankYou(true);
 
     // ✅ SAVE donation to backend
