@@ -1,13 +1,4 @@
-"use client";
-
-import { useState } from "react";
-
-export default function Home() {
-  const [activeTab, setActiveTab] = useState("donate");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [chapter, setChapter] = useState("");
-  const [amount, setAmount] = useState("");
+"use client";"use clientamount, setAmount] = useState("");
   const [showThankYou, setShowThankYou] = useState(false);
 
   const handleContinue = async () => {
@@ -133,7 +124,7 @@ export default function Home() {
                 width: "100%",
                 padding: "14px",
                 borderRadius: "12px",
-                border: "1px solid "#b8b4a6",
+                border: "1px solid #b8b4a6",
                 marginBottom: "18px",
                 fontSize: "17px",
               }}
@@ -160,7 +151,7 @@ export default function Home() {
                 width: "100%",
                 padding: "14px",
                 borderRadius: "12px",
-                border: "1px solid "#b8b4a6",
+                border: "1px solid #b8b4a6",
                 marginBottom: "18px",
                 fontSize: "17px",
               }}
@@ -187,7 +178,7 @@ export default function Home() {
                 width: "100%",
                 padding: "14px",
                 borderRadius: "12px",
-                border: "1px solid "#b8b4a6",
+                border: "1px solid #b8b4a6",
                 marginBottom: "18px",
                 fontSize: "17px",
               }}
@@ -277,7 +268,7 @@ export default function Home() {
               <div
                 style={{
                   background: "#F7EFE7",
-                  border: "2px solid "#818263",
+                  border: "2px solid #818263",
                   borderRadius: "10px",
                   padding: "8px 14px",
                   fontSize: "15px",
@@ -291,7 +282,7 @@ export default function Home() {
               <div
                 style={{
                   background: "#F7EFE7",
-                  border: "2px solid "#818263",
+                  border: "2px solid #818263",
                   borderRadius: "10px",
                   padding: "8px 14px",
                   fontSize: "15px",
@@ -299,7 +290,7 @@ export default function Home() {
                   color: "#4A4A3F",
                 }}
               >
-                💳 Cards
+                💳 Cards
               </div>
             </div>
 
@@ -309,7 +300,7 @@ export default function Home() {
                   background: "#e9f5e3",
                   borderRadius: "14px",
                   padding: "16px",
-                  border: "1px solid "#b5d6a3",
+                  border: "1px solid #b5d6a3",
                   marginBottom: "28px",
                 }}
               >
@@ -364,8 +355,8 @@ export default function Home() {
                     color: "white",
                     padding: "12px 20px",
                     borderRadius: "10px",
-                    cursor: "pointer",
                     fontSize: "16px",
+                    cursor: "pointer",
                   }}
                 >
                   Instagram
@@ -385,8 +376,8 @@ export default function Home() {
                     color: "white",
                     padding: "12px 20px",
                     borderRadius: "10px",
-                    cursor: "pointer",
                     fontSize: "16px",
+                    cursor: "pointer",
                   }}
                 >
                   Facebook
@@ -402,8 +393,8 @@ export default function Home() {
                     color: "white",
                     padding: "12px 20px",
                     borderRadius: "10px",
-                    cursor: "pointer",
                     fontSize: "16px",
+                    cursor: "pointer",
                   }}
                 >
                   Copy Link
@@ -433,3 +424,11 @@ export default function Home() {
     </div>
   );
 }
+
+import { useState } from "react";
+
+export default function Home() {
+  const [activeTab, setActiveTab] = useState("donate");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [chapter, setChapter] = useState("");
