@@ -290,7 +290,7 @@
                   color: "#4A4A3F",
                 }}
               >
-                💳 Cards
+                💳 Cards
               </div>
             </div>
 
