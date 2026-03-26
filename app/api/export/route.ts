@@ -1,8 +1,18 @@
 import { NextResponse } from "next/server";
-import { getSubmissions } from "../submit/route";
 
 export async function GET() {
-  const rows = getSubmissions();
+  const res = await fetch(
+    `${process.env.KV_REST_API_URL}/lrange/donations/0/-1`,
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.KV_REST_API_READ_ONLY_TOKEN}`,
+      },
+    }
+  );
+
+  const rows = (await res.json()).result?.map((r: string) =>
+    JSON.parse(r)
+  ) || [];
 
   const header = [
     "Timestamp",
