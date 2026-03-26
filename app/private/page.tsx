@@ -3,8 +3,10 @@
 import { useEffect, useState } from "react";
 
 export default function AdminDashboard() {
+  const [donations, setDonations] = useState([]);
   const [copied, setCopied] = useState(false);
 
+  // ✅ Check admin login
   useEffect(() => {
     const loggedIn = localStorage.getItem("greekgive_admin");
     if (!loggedIn) {
@@ -12,20 +14,37 @@ export default function AdminDashboard() {
     }
   }, []);
 
-  const handleExport = () => {
-    const csvContent =
-      "data:text/csv;charset=utf-8,Name,Email,Amount,Chapter\n";
-    const link = document.createElement("a");
-    link.href = encodeURI(csvContent);
-    link.download = "greekgive-donations.csv";
-    link.click();
-  };
+  // ✅ Load donations from Upstash Redis
+  useEffect(() => {
+    async function load() {
+      try {
+        const res = await fetch("/api/submit");
+        const data = await res.json();
+        setDonations(data);
+      } catch (err) {
+        console.error("Error loading donations:", err);
+      }
+    }
+    load();
+  }, []);
 
+  // ✅ Copy fundraiser link
   const handleCopyLink = () => {
     navigator.clipboard.writeText("https://greekgive.org");
     setCopied(true);
     setTimeout(() => setCopied(false), 1500);
   };
+
+  // ✅ Export CSV from API
+  const handleExport = () => {
+    window.location.href = "/api/export";
+  };
+
+  // ✅ Monthly totals (simple calculation)
+  const totalAmount = donations.reduce(
+    (sum, d) => sum + Number(d.amount || 0),
+    0
+  );
 
   return (
     <div
@@ -41,7 +60,7 @@ export default function AdminDashboard() {
     >
       <div
         style={{
-          backgroundColor: "#F7EFE7", // Oat Latte
+          backgroundColor: "#F7EFE7", // Light Oat Latte
           borderRadius: "22px",
           padding: "50px 30px 70px 30px",
           width: "100%",
@@ -66,13 +85,13 @@ export default function AdminDashboard() {
           style={{
             fontSize: "22px",
             color: "#818263",
-            marginBottom: "32px",
+            marginBottom: "28px",
           }}
         >
           Admin Dashboard
         </p>
 
-        {/* COPY FUNDRAISER LINK */}
+        {/* ✅ COPY FUNDRAISER LINK */}
         <button
           onClick={handleCopyLink}
           style={{
@@ -91,7 +110,7 @@ export default function AdminDashboard() {
           {copied ? "Link Copied!" : "Copy Fundraiser Link"}
         </button>
 
-        {/* STATS / TOTALS */}
+        {/* ✅ STATS PANEL */}
         <div
           style={{
             background: "#ffffffcc",
@@ -112,18 +131,28 @@ export default function AdminDashboard() {
           >
             Fundraiser Stats
           </h3>
+
           <p style={{ marginBottom: "6px", color: "#4A4A3F" }}>
-            Total Donations: <strong>—</strong>
+            Total Donations: <strong>{donations.length}</strong>
           </p>
+
           <p style={{ marginBottom: "6px", color: "#4A4A3F" }}>
-            Total Amount Raised: <strong>—</strong>
+            Total Amount Raised:{" "}
+            <strong>${totalAmount.toFixed(2)}</strong>
           </p>
+
           <p style={{ marginBottom: "6px", color: "#4A4A3F" }}>
-            Highest Donation: <strong>—</strong>
+            Highest Donation:{" "}
+            <strong>
+              $
+              {donations.length
+                ? Math.max(...donations.map((d) => Number(d.amount || 0)))
+                : 0}
+            </strong>
           </p>
         </div>
 
-        {/* VIEW DONATIONS TABLE (placeholder) */}
+        {/* ✅ DONATION TABLE */}
         <div
           style={{
             background: "#ffffffcc",
@@ -145,10 +174,6 @@ export default function AdminDashboard() {
             Donation Records
           </h3>
 
-          <p style={{ fontSize: "15px", opacity: 0.7, marginBottom: "10px" }}>
-            (Full donation log coming soon)
-          </p>
-
           <table
             style={{
               width: "100%",
@@ -166,30 +191,34 @@ export default function AdminDashboard() {
                 </th>
               </tr>
             </thead>
+
             <tbody>
-              <tr>
-                <td
-                  style={{
-                    padding: "8px",
-                    borderBottom: "1px solid #e6e6e6",
-                  }}
-                >
-                  —
-                </td>
-                <td
-                  style={{
-                    padding: "8px",
-                    borderBottom: "1px solid #e6e6e6",
-                  }}
-                >
-                  —
-                </td>
-              </tr>
+              {donations.map((d, i) => (
+                <tr key={i}>
+                  <td
+                    style={{
+                      padding: "8px",
+                      borderBottom: "1px solid #e6e6e6",
+                    }}
+                  >
+                    {d.name}
+                  </td>
+
+                  <td
+                    style={{
+                      padding: "8px",
+                      borderBottom: "1px solid #e6e6e6",
+                    }}
+                  >
+                    ${d.amount}
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
 
-        {/* EXPORT */}
+        {/* ✅ EXPORT */}
         <button
           onClick={handleExport}
           style={{
@@ -202,13 +231,13 @@ export default function AdminDashboard() {
             border: "none",
             color: "white",
             cursor: "pointer",
-            marginBottom: "30px",
+            marginBottom: "26px",
           }}
         >
           Export to Excel
         </button>
 
-        {/* QR LINK */}
+        {/* ✅ QR LINK */}
         <button
           onClick={() => (window.location.href = "/qr")}
           style={{
@@ -227,7 +256,7 @@ export default function AdminDashboard() {
           Open QR Page
         </button>
 
-        {/* RETURN HOME */}
+        {/* ✅ RETURN HOME */}
         <button
           onClick={() => (window.location.href = "/")}
           style={{
@@ -243,19 +272,20 @@ export default function AdminDashboard() {
           return to homepage
         </button>
 
-        {/* SCRIPT FOOTER LOGO */}
+        {/* ✅ FOOTER LOGO */}
         <h2
           style={{
             fontFamily: "Zeyada, cursive",
             fontSize: "40px",
             color: "#818263",
-            marginBottom: "20px",
+            marginTop: "20px",
+            marginBottom: "16px",
           }}
         >
           greekgive
         </h2>
 
-        {/* LOGOUT */}
+        {/* ✅ LOGOUT */}
         <button
           onClick={() => {
             localStorage.removeItem("greekgive_admin");
