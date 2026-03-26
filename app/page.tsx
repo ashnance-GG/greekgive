@@ -1,92 +1,14 @@
-"use client";
-
-import { solid #b5d6a3",import { useState } from "react";
-                  marginBottom: "28px",
-                }}
-              >
-                <p
-                  style={{
-                    fontSize: "18px",
-                    fontWeight: 600,
-                    color: "#4A4A3F",
-                  }}
-                >
-                  Thank you so much for supporting our chapter! 💜
-                </p>
-              </div>
-            )}
-
-            {/* SHARE BLOCK */}
-            <div
-              style={{
-                backgroundColor: "#F7EFE7",
-                padding: "20px",
-                borderRadius: "14px",
-                marginTop: "10px",
-                border: "1px solid "#e2dacb",
-              }}
-            >
-              <p
-                style={{
-                  color: "#818263",
-                  fontSize: "18px",
-                  fontWeight: 600,
-                  marginBottom: "14px",
-                }}
-              >
-                Share this fundraiser
-              </p>
-
-              <div
-                style={{
-                  display: "flex",
-                  gap: "12px",
-                  justifyContent: "center",
-                  flexWrap: "wrap",
-                }}
-              >
-                {/* Instagram */}
-                <button
-                  onClick={() => {
-                    navigator.clipboard.writeText(window.location.href);
-                    window.open("https://www.instagram.com/", "_blank");
-                  }}
-                  style={{
-                    background: "#DDBAAE",
-                    border: "2px solid #818263",
+"use client";"use "2px solid #818263",
                     color: "white",
                     padding: "12px 20px",
                     borderRadius: "10px",
-                    cursor: "pointer",
                     fontSize: "16px",
-                  }}
-                >
-                  Instagram
-                </button>
-
-                {/* Facebook */}
-                <button
-                  onClick={() => {
-                    const url = encodeURIComponent(window.location.href);
-                    window.open(
-                      `https://www.facebook.com/sharer/sharer.php?u=${url}`,
-                      "_blank"
-                    );
-                  }}
-                  style={{
-                    background: "#DDBAAE",
-                    border: "2px solid #818263",
-                    color: "white",
-                    padding: "12px 20px",
-                    borderRadius: "10px",
                     cursor: "pointer",
-                    fontSize: "16px",
                   }}
                 >
                   Facebook
                 </button>
 
-                {/* Copy Link */}
                 <button
                   onClick={() =>
                     navigator.clipboard.writeText(window.location.href)
@@ -97,8 +19,8 @@ import { solid #b5d6a3",import { useState } from "react";
                     color: "white",
                     padding: "12px 20px",
                     borderRadius: "10px",
-                    cursor: "pointer",
                     fontSize: "16px",
+                    cursor: "pointer",
                   }}
                 >
                   Copy Link
@@ -108,8 +30,8 @@ import { solid #b5d6a3",import { useState } from "react";
           </>
         )}
 
-        {/* ADMIN LOGIN */}
-        <div style={{ marginTop: "36px", textAlign: "center" }}>
+        {/* ADMIN LOGIN LINK */}
+        <div style={{ marginTop: "36px" }}>
           <button
             onClick={() => (window.location.href = "/private/login")}
             style={{
@@ -118,8 +40,8 @@ import { solid #b5d6a3",import { useState } from "react";
               color: "#818263",
               fontSize: "14px",
               textDecoration: "underline",
-              cursor: "pointer",
               opacity: 0.7,
+              cursor: "pointer",
             }}
           >
             admin login
@@ -129,6 +51,9 @@ import { solid #b5d6a3",import { useState } from "react";
     </div>
   );
 }
+
+
+import { useState } from "react";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("donate");
@@ -141,16 +66,11 @@ export default function Home() {
   const handleContinue = async () => {
     setShowThankYou(true);
 
-    // ✅ SAVE donation into Upstash Redis via /api/submit
+    // ✅ Save donation to Upstash via API
     await fetch("/api/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name,
-        email,
-        amount,
-        chapter,
-      }),
+      body: JSON.stringify({ name, email, chapter, amount }),
     });
   };
 
@@ -158,7 +78,7 @@ export default function Home() {
     <div
       style={{
         minHeight: "100vh",
-        backgroundColor: "#EFD7CF", // Peach Protein
+        backgroundColor: "#EFD7CF",
         display: "flex",
         justifyContent: "center",
         alignItems: "flex-start",
@@ -166,10 +86,9 @@ export default function Home() {
         fontFamily: "Arapey, serif",
       }}
     >
-      {/* MAIN CARD */}
       <div
         style={{
-          backgroundColor: "#F7EFE7", // Lighter Oat Latte
+          backgroundColor: "#F7EFE7",
           borderRadius: "22px",
           padding: "50px 30px 70px 30px",
           width: "100%",
@@ -194,25 +113,24 @@ export default function Home() {
           style={{
             fontSize: "22px",
             color: "#818263",
-            marginBottom: "26px", // more space before tabs
+            marginBottom: "26px",
           }}
         >
           Fundraising, made simple.
         </p>
 
-        {/* DONATE / ABOUT TABS — CENTERED, CONNECTED, SHORTER */}
+        {/* DONATE / ABOUT TABS */}
         <div
           style={{
             display: "flex",
             justifyContent: "center",
             margin: "0 auto 32px auto",
-            width: "70%", // smaller tabs
+            width: "70%",
             borderRadius: "14px",
             overflow: "hidden",
             border: "2px solid #818263",
           }}
         >
-          {/* DONATE */}
           <button
             onClick={() => setActiveTab("donate")}
             style={{
@@ -229,10 +147,8 @@ export default function Home() {
             Donate
           </button>
 
-          {/* DIVIDER */}
           <div style={{ width: "2px", backgroundColor: "#818263" }} />
 
-          {/* ABOUT */}
           <button
             onClick={() => (window.location.href = "/about")}
             style={{
@@ -250,10 +166,9 @@ export default function Home() {
           </button>
         </div>
 
-        {/* DONATE FORM CONTENT */}
+        {/* DONATION FORM */}
         {activeTab === "donate" && (
           <>
-            {/* NAME */}
             <label
               style={{
                 fontWeight: 600,
@@ -268,20 +183,19 @@ export default function Home() {
             </label>
             <input
               type="text"
-              placeholder="Your Name"
               value={name}
+              placeholder="Your Name"
               onChange={(e) => setName(e.target.value)}
               style={{
                 width: "100%",
                 padding: "14px",
                 borderRadius: "12px",
                 border: "1px solid #b8b4a6",
-                fontSize: "17px",
                 marginBottom: "18px",
+                fontSize: "17px",
               }}
             />
 
-            {/* EMAIL */}
             <label
               style={{
                 fontWeight: 600,
@@ -296,20 +210,19 @@ export default function Home() {
             </label>
             <input
               type="email"
-              placeholder="Your Email"
               value={email}
+              placeholder="Your Email"
               onChange={(e) => setEmail(e.target.value)}
               style={{
                 width: "100%",
                 padding: "14px",
                 borderRadius: "12px",
                 border: "1px solid #b8b4a6",
-                fontSize: "17px",
                 marginBottom: "18px",
+                fontSize: "17px",
               }}
             />
 
-            {/* CHAPTER */}
             <label
               style={{
                 fontWeight: 600,
@@ -324,20 +237,19 @@ export default function Home() {
             </label>
             <input
               type="text"
-              placeholder="e.g., Beta Zeta"
               value={chapter}
+              placeholder="e.g., Beta Zeta"
               onChange={(e) => setChapter(e.target.value)}
               style={{
                 width: "100%",
                 padding: "14px",
                 borderRadius: "12px",
                 border: "1px solid #b8b4a6",
-                fontSize: "17px",
                 marginBottom: "18px",
+                fontSize: "17px",
               }}
             />
 
-            {/* DONATION AMOUNT */}
             <label
               style={{
                 fontWeight: 600,
@@ -352,20 +264,20 @@ export default function Home() {
             </label>
             <input
               type="number"
-              placeholder="$0.00"
               value={amount}
+              placeholder="$0.00"
               onChange={(e) => setAmount(e.target.value)}
               style={{
                 width: "100%",
                 padding: "14px",
                 borderRadius: "12px",
                 border: "1px solid #b8b4a6",
-                fontSize: "17px",
                 marginBottom: "18px",
+                fontSize: "17px",
               }}
             />
 
-            {/* PRESET AMOUNTS */}
+            {/* PRESETS */}
             <div
               style={{
                 display: "flex",
@@ -380,8 +292,8 @@ export default function Home() {
                   style={{
                     flex: 1,
                     background: "#818263",
-                    borderRadius: "10px",
                     padding: "10px 0",
+                    borderRadius: "10px",
                     color: "white",
                     fontSize: "16px",
                     border: "none",
@@ -412,7 +324,7 @@ export default function Home() {
               Continue to Payment
             </button>
 
-            {/* ✅ APPLE PAY + CARDS BADGES */}
+            {/* BADGES */}
             <div
               style={{
                 display: "flex",
@@ -429,13 +341,12 @@ export default function Home() {
                   borderRadius: "10px",
                   padding: "8px 14px",
                   fontSize: "15px",
-                  color: "#4A4A3F",
                   fontWeight: 600,
+                  color: "#4A4A3F",
                 }}
               >
-                 Apple Pay
+                 Apple Pay
               </div>
-
               <div
                 style={{
                   background: "#F7EFE7",
@@ -443,18 +354,91 @@ export default function Home() {
                   borderRadius: "10px",
                   padding: "8px 14px",
                   fontSize: "15px",
-                  color: "#4A4A3F",
                   fontWeight: 600,
+                  color: "#4A4A3F",
                 }}
               >
                 💳 Cards
               </div>
             </div>
 
-            {/* THANK YOU MESSAGE */}
+            {/* THANK YOU */}
             {showThankYou && (
               <div
                 style={{
                   background: "#e9f5e3",
                   borderRadius: "14px",
                   padding: "16px",
+                  border: "1px solid #b5d6a3",
+                  marginBottom: "28px",
+                }}
+              >
+                <p
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: 600,
+                    color: "#4A4A3F",
+                  }}
+                >
+                  Thank you so much for supporting our chapter! 💜
+                </p>
+              </div>
+            )}
+
+            {/* SHARE BLOCK */}
+            <div
+              style={{
+                backgroundColor: "#F7EFE7",
+                padding: "20px",
+                borderRadius: "14px",
+                marginTop: "10px",
+                border: "1px solid #e2dacb",
+              }}
+            >
+              <p
+                style={{
+                  color: "#818263",
+                  fontSize: "18px",
+                  fontWeight: 600,
+                  marginBottom: "14px",
+                }}
+              >
+                Share this fundraiser
+              </p>
+
+              <div
+                style={{
+                  display: "flex",
+                  gap: "12px",
+                  justifyContent: "center",
+                  flexWrap: "wrap",
+                }}
+              >
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText(window.location.href);
+                    window.open("https://www.instagram.com/", "_blank");
+                  }}
+                  style={{
+                    background: "#DDBAAE",
+                    border: "2px solid #818263",
+                    color: "white",
+                    padding: "12px 20px",
+                    borderRadius: "10px",
+                    fontSize: "16px",
+                    cursor: "pointer",
+                  }}
+                >
+                  Instagram
+                </button>
+
+                <button
+                  onClick={() => {
+                    const url = encodeURIComponent(window.location.href);
+                    window.open(
+                      `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+                      "_blank"
+                    );
+                  }}
+                  style={{
+                    background: "#DDBAAE",
