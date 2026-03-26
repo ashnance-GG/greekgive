@@ -1,6 +1,134 @@
 "use client";
 
-import { useState } from "react";
+import { solid #b5d6a3",import { useState } from "react";
+                  marginBottom: "28px",
+                }}
+              >
+                <p
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: 600,
+                    color: "#4A4A3F",
+                  }}
+                >
+                  Thank you so much for supporting our chapter! 💜
+                </p>
+              </div>
+            )}
+
+            {/* SHARE BLOCK */}
+            <div
+              style={{
+                backgroundColor: "#F7EFE7",
+                padding: "20px",
+                borderRadius: "14px",
+                marginTop: "10px",
+                border: "1px solid "#e2dacb",
+              }}
+            >
+              <p
+                style={{
+                  color: "#818263",
+                  fontSize: "18px",
+                  fontWeight: 600,
+                  marginBottom: "14px",
+                }}
+              >
+                Share this fundraiser
+              </p>
+
+              <div
+                style={{
+                  display: "flex",
+                  gap: "12px",
+                  justifyContent: "center",
+                  flexWrap: "wrap",
+                }}
+              >
+                {/* Instagram */}
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText(window.location.href);
+                    window.open("https://www.instagram.com/", "_blank");
+                  }}
+                  style={{
+                    background: "#DDBAAE",
+                    border: "2px solid #818263",
+                    color: "white",
+                    padding: "12px 20px",
+                    borderRadius: "10px",
+                    cursor: "pointer",
+                    fontSize: "16px",
+                  }}
+                >
+                  Instagram
+                </button>
+
+                {/* Facebook */}
+                <button
+                  onClick={() => {
+                    const url = encodeURIComponent(window.location.href);
+                    window.open(
+                      `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+                      "_blank"
+                    );
+                  }}
+                  style={{
+                    background: "#DDBAAE",
+                    border: "2px solid #818263",
+                    color: "white",
+                    padding: "12px 20px",
+                    borderRadius: "10px",
+                    cursor: "pointer",
+                    fontSize: "16px",
+                  }}
+                >
+                  Facebook
+                </button>
+
+                {/* Copy Link */}
+                <button
+                  onClick={() =>
+                    navigator.clipboard.writeText(window.location.href)
+                  }
+                  style={{
+                    background: "#DDBAAE",
+                    border: "2px solid #818263",
+                    color: "white",
+                    padding: "12px 20px",
+                    borderRadius: "10px",
+                    cursor: "pointer",
+                    fontSize: "16px",
+                  }}
+                >
+                  Copy Link
+                </button>
+              </div>
+            </div>
+          </>
+        )}
+
+        {/* ADMIN LOGIN */}
+        <div style={{ marginTop: "36px", textAlign: "center" }}>
+          <button
+            onClick={() => (window.location.href = "/private/login")}
+            style={{
+              background: "transparent",
+              border: "none",
+              color: "#818263",
+              fontSize: "14px",
+              textDecoration: "underline",
+              cursor: "pointer",
+              opacity: 0.7,
+            }}
+          >
+            admin login
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("donate");
@@ -11,22 +139,9 @@ export default function Home() {
   const [showThankYou, setShowThankYou] = useState(false);
 
   const handleContinue = async () => {
-  setShowThankYou(true);
-
-  await fetch("/api/submit", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      name,
-      email,
-      amount,
-      chapter,
-    }),
-  });
-};
     setShowThankYou(true);
 
-    // ✅ SAVE donation to backend
+    // ✅ SAVE donation into Upstash Redis via /api/submit
     await fetch("/api/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -35,11 +150,8 @@ export default function Home() {
         email,
         amount,
         chapter,
-        source: "Homepage",
       }),
     });
-
-    // Payment redirect (coming later)
   };
 
   return (
@@ -57,7 +169,7 @@ export default function Home() {
       {/* MAIN CARD */}
       <div
         style={{
-          backgroundColor: "#F7EFE7", // Light Oat Latte
+          backgroundColor: "#F7EFE7", // Lighter Oat Latte
           borderRadius: "22px",
           padding: "50px 30px 70px 30px",
           width: "100%",
@@ -72,7 +184,7 @@ export default function Home() {
             fontFamily: "Zeyada, cursive",
             fontSize: "58px",
             color: "#818263",
-            marginBottom: "4px", // tight spacing
+            marginBottom: "4px",
           }}
         >
           greekgive
@@ -82,19 +194,19 @@ export default function Home() {
           style={{
             fontSize: "22px",
             color: "#818263",
-            marginBottom: "26px", // extra spacing now
+            marginBottom: "26px", // more space before tabs
           }}
         >
           Fundraising, made simple.
         </p>
 
-        {/* DONATE / ABOUT TABS (CENTERED, SHORTER) */}
+        {/* DONATE / ABOUT TABS — CENTERED, CONNECTED, SHORTER */}
         <div
           style={{
             display: "flex",
             justifyContent: "center",
             margin: "0 auto 32px auto",
-            width: "70%",
+            width: "70%", // smaller tabs
             borderRadius: "14px",
             overflow: "hidden",
             border: "2px solid #818263",
@@ -118,12 +230,7 @@ export default function Home() {
           </button>
 
           {/* DIVIDER */}
-          <div
-            style={{
-              width: "2px",
-              backgroundColor: "#818263",
-            }}
-          />
+          <div style={{ width: "2px", backgroundColor: "#818263" }} />
 
           {/* ABOUT */}
           <button
@@ -143,7 +250,7 @@ export default function Home() {
           </button>
         </div>
 
-        {/* DONATE FORM */}
+        {/* DONATE FORM CONTENT */}
         {activeTab === "donate" && (
           <>
             {/* NAME */}
@@ -351,132 +458,3 @@ export default function Home() {
                   background: "#e9f5e3",
                   borderRadius: "14px",
                   padding: "16px",
-                  border: "1px solid #b5d6a3",
-                  marginBottom: "28px",
-                }}
-              >
-                <p
-                  style={{
-                    fontSize: "18px",
-                    fontWeight: 600,
-                    color: "#4A4A3F",
-                  }}
-                >
-                  Thank you so much for supporting our chapter! 💜
-                </p>
-              </div>
-            )}
-
-            {/* SHARE BLOCK */}
-            <div
-              style={{
-                backgroundColor: "#F7EFE7",
-                padding: "20px",
-                borderRadius: "14px",
-                marginTop: "10px",
-                border: "1px solid #e2dacb",
-              }}
-            >
-              <p
-                style={{
-                  color: "#818263",
-                  fontSize: "18px",
-                  fontWeight: 600,
-                  marginBottom: "14px",
-                }}
-              >
-                Share this fundraiser
-              </p>
-
-              <div
-                style={{
-                  display: "flex",
-                  gap: "12px",
-                  justifyContent: "center",
-                  flexWrap: "wrap",
-                }}
-              >
-                {/* Instagram */}
-                <button
-                  onClick={() => {
-                    navigator.clipboard.writeText(window.location.href);
-                    window.open("https://www.instagram.com/", "_blank");
-                  }}
-                  style={{
-                    background: "#DDBAAE",
-                    border: "2px solid #818263",
-                    color: "white",
-                    padding: "12px 20px",
-                    borderRadius: "10px",
-                    cursor: "pointer",
-                    fontSize: "16px",
-                  }}
-                >
-                  Instagram
-                </button>
-
-                {/* Facebook */}
-                <button
-                  onClick={() => {
-                    const url = encodeURIComponent(window.location.href);
-                    window.open(
-                      `https://www.facebook.com/sharer/sharer.php?u=${url}`,
-                      "_blank"
-                    );
-                  }}
-                  style={{
-                    background: "#DDBAAE",
-                    border: "2px solid #818263",
-                    color: "white",
-                    padding: "12px 20px",
-                    borderRadius: "10px",
-                    cursor: "pointer",
-                    fontSize: "16px",
-                  }}
-                >
-                  Facebook
-                </button>
-
-                {/* Copy Link */}
-                <button
-                  onClick={() =>
-                    navigator.clipboard.writeText(window.location.href)
-                  }
-                  style={{
-                    background: "#DDBAAE",
-                    border: "2px solid #818263",
-                    color: "white",
-                    padding: "12px 20px",
-                    borderRadius: "10px",
-                    cursor: "pointer",
-                    fontSize: "16px",
-                  }}
-                >
-                  Copy Link
-                </button>
-              </div>
-            </div>
-          </>
-        )}
-
-        {/* ADMIN LOGIN */}
-        <div style={{ marginTop: "36px", textAlign: "center" }}>
-          <button
-            onClick={() => (window.location.href = "/private/login")}
-            style={{
-              background: "transparent",
-              border: "none",
-              color: "#818263",
-              fontSize: "14px",
-              textDecoration: "underline",
-              cursor: "pointer",
-              opacity: 0.7,
-            }}
-          >
-            admin login
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
