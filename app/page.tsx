@@ -1,57 +1,4 @@
-"use client";"use "2px solid #818263",
-                    color: "white",
-                    padding: "12px 20px",
-                    borderRadius: "10px",
-                    fontSize: "16px",
-                    cursor: "pointer",
-                  }}
-                >
-                  Facebook
-                </button>
-
-                <button
-                  onClick={() =>
-                    navigator.clipboard.writeText(window.location.href)
-                  }
-                  style={{
-                    background: "#DDBAAE",
-                    border: "2px solid #818263",
-                    color: "white",
-                    padding: "12px 20px",
-                    borderRadius: "10px",
-                    fontSize: "16px",
-                    cursor: "pointer",
-                  }}
-                >
-                  Copy Link
-                </button>
-              </div>
-            </div>
-          </>
-        )}
-
-        {/* ADMIN LOGIN LINK */}
-        <div style={{ marginTop: "36px" }}>
-          <button
-            onClick={() => (window.location.href = "/private/login")}
-            style={{
-              background: "transparent",
-              border: "none",
-              color: "#818263",
-              fontSize: "14px",
-              textDecoration: "underline",
-              opacity: 0.7,
-              cursor: "pointer",
-            }}
-          >
-            admin login
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
+"use client";
 
 import { useState } from "react";
 
@@ -66,7 +13,6 @@ export default function Home() {
   const handleContinue = async () => {
     setShowThankYou(true);
 
-    // ✅ Save donation to Upstash via API
     await fetch("/api/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -97,7 +43,6 @@ export default function Home() {
           textAlign: "center",
         }}
       >
-        {/* HEADER */}
         <h1
           style={{
             fontFamily: "Zeyada, cursive",
@@ -119,7 +64,6 @@ export default function Home() {
           Fundraising, made simple.
         </p>
 
-        {/* DONATE / ABOUT TABS */}
         <div
           style={{
             display: "flex",
@@ -166,7 +110,6 @@ export default function Home() {
           </button>
         </div>
 
-        {/* DONATION FORM */}
         {activeTab === "donate" && (
           <>
             <label
@@ -190,7 +133,7 @@ export default function Home() {
                 width: "100%",
                 padding: "14px",
                 borderRadius: "12px",
-                border: "1px solid #b8b4a6",
+                border: "1px solid "#b8b4a6",
                 marginBottom: "18px",
                 fontSize: "17px",
               }}
@@ -217,7 +160,7 @@ export default function Home() {
                 width: "100%",
                 padding: "14px",
                 borderRadius: "12px",
-                border: "1px solid #b8b4a6",
+                border: "1px solid "#b8b4a6",
                 marginBottom: "18px",
                 fontSize: "17px",
               }}
@@ -244,7 +187,7 @@ export default function Home() {
                 width: "100%",
                 padding: "14px",
                 borderRadius: "12px",
-                border: "1px solid #b8b4a6",
+                border: "1px solid "#b8b4a6",
                 marginBottom: "18px",
                 fontSize: "17px",
               }}
@@ -271,13 +214,12 @@ export default function Home() {
                 width: "100%",
                 padding: "14px",
                 borderRadius: "12px",
-                border: "1px solid #b8b4a6",
+                border: "1px solid "#b8b4a6",
                 marginBottom: "18px",
                 fontSize: "17px",
               }}
             />
 
-            {/* PRESETS */}
             <div
               style={{
                 display: "flex",
@@ -305,7 +247,6 @@ export default function Home() {
               ))}
             </div>
 
-            {/* CONTINUE BUTTON */}
             <button
               onClick={handleContinue}
               style={{
@@ -324,7 +265,6 @@ export default function Home() {
               Continue to Payment
             </button>
 
-            {/* BADGES */}
             <div
               style={{
                 display: "flex",
@@ -337,7 +277,7 @@ export default function Home() {
               <div
                 style={{
                   background: "#F7EFE7",
-                  border: "2px solid #818263",
+                  border: "2px solid "#818263",
                   borderRadius: "10px",
                   padding: "8px 14px",
                   fontSize: "15px",
@@ -347,10 +287,11 @@ export default function Home() {
               >
                  Apple Pay
               </div>
+
               <div
                 style={{
                   background: "#F7EFE7",
-                  border: "2px solid #818263",
+                  border: "2px solid "#818263",
                   borderRadius: "10px",
                   padding: "8px 14px",
                   fontSize: "15px",
@@ -362,14 +303,13 @@ export default function Home() {
               </div>
             </div>
 
-            {/* THANK YOU */}
             {showThankYou && (
               <div
                 style={{
                   background: "#e9f5e3",
                   borderRadius: "14px",
                   padding: "16px",
-                  border: "1px solid #b5d6a3",
+                  border: "1px solid "#b5d6a3",
                   marginBottom: "28px",
                 }}
               >
@@ -385,14 +325,13 @@ export default function Home() {
               </div>
             )}
 
-            {/* SHARE BLOCK */}
             <div
               style={{
                 backgroundColor: "#F7EFE7",
                 padding: "20px",
                 borderRadius: "14px",
                 marginTop: "10px",
-                border: "1px solid #e2dacb",
+                border: "1px solid "#e2dacb",
               }}
             >
               <p
@@ -421,12 +360,12 @@ export default function Home() {
                   }}
                   style={{
                     background: "#DDBAAE",
-                    border: "2px solid #818263",
+                    border: "2px solid "#818263",
                     color: "white",
                     padding: "12px 20px",
                     borderRadius: "10px",
-                    fontSize: "16px",
                     cursor: "pointer",
+                    fontSize: "16px",
                   }}
                 >
                   Instagram
@@ -442,3 +381,55 @@ export default function Home() {
                   }}
                   style={{
                     background: "#DDBAAE",
+                    border: "2px solid "#818263",
+                    color: "white",
+                    padding: "12px 20px",
+                    borderRadius: "10px",
+                    cursor: "pointer",
+                    fontSize: "16px",
+                  }}
+                >
+                  Facebook
+                </button>
+
+                <button
+                  onClick={() =>
+                    navigator.clipboard.writeText(window.location.href)
+                  }
+                  style={{
+                    background: "#DDBAAE",
+                    border: "2px solid "#818263",
+                    color: "white",
+                    padding: "12px 20px",
+                    borderRadius: "10px",
+                    cursor: "pointer",
+                    fontSize: "16px",
+                  }}
+                >
+                  Copy Link
+                </button>
+              </div>
+            </div>
+          </>
+        )}
+
+        <div style={{ marginTop: "36px" }}>
+          <button
+            onClick={() => (window.location.href = "/private/login")}
+            style={{
+              background: "transparent",
+              border: "none",
+              color: "#818263",
+              fontSize: "14px",
+              textDecoration: "underline",
+              opacity: 0.7,
+              cursor: "pointer",
+            }}
+          >
+            admin login
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
