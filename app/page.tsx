@@ -133,7 +133,7 @@ export default function Home() {
                 width: "100%",
                 padding: "14px",
                 borderRadius: "12px",
-                border: "1px solid #b8b4a6",
+               border: "1px solid #b8b4a6",
                 marginBottom: "18px",
                 fontSize: "17px",
               }}
